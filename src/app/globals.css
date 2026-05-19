@@ -1,26 +1,160 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --white: #ffffff;
+  --off: #f7f9fc;
+  --soft: #eef2f7;
+  --off-white: #f7f9fc;
+  --soft-grey: #eef2f7;
+  --navy: #0d1f3c;
+  --navy-mid: #1a3560;
+  --blue: #1e4d8c;
+  --accent: #3b82c4;
+  --accent-l: #ebf3fb;
+  --accent-light: #ebf3fb;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --primary: #0d1f3c;
+  --secondary: #5a6b84;
+  --muted: #8a99ae;
+  --border: rgba(13, 31, 60, 0.08);
+  --strong: rgba(13, 31, 60, 0.16);
+  --glass: rgba(255, 255, 255, 0.7);
+  --glass-strong: rgba(255, 255, 255, 0.88);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+  --shadow-sm: 0 2px 12px rgba(13, 31, 60, 0.07);
+  --shadow-md: 0 4px 24px rgba(13, 31, 60, 0.1);
+  --shadow-lg: 0 8px 48px rgba(13, 31, 60, 0.13);
+  --footer: #0d1f3c;
+  --text: #0d1f3c;
+  --t2: #5a6b84;
+  --t3: #8a99ae;
+  --bd: rgba(13, 31, 60, 0.08);
+  --bd2: rgba(13, 31, 60, 0.15);
+  --success: #10b981;
+  --success-l: #ecfdf5;
+  --warning: #f59e0b;
+  --warning-l: #fffbeb;
+  --sh1: 0 2px 12px rgba(13, 31, 60, 0.06);
+  --sh2: 0 4px 24px rgba(13, 31, 60, 0.09);
+  --sh3: 0 8px 48px rgba(13, 31, 60, 0.13);
+  --r: 8px;
+  --rm: 12px;
+  --rl: 16px;
+  --rx: 24px;
+  --rf: 9999px;
 }
+
+[data-theme="dark"] {
+  --white: #0a0f1a;
+  --off: #0f1826;
+  --soft: #151f31;
+  --off-white: #0f1826;
+  --soft-grey: #151f31;
+  --navy: #e8eff9;
+  --accent: #5b9bd5;
+  --accent-l: rgba(91, 155, 213, 0.12);
+  --accent-light: rgba(91, 155, 213, 0.12);
+  --primary: #e8eff9;
+  --secondary: #8fa5c4;
+  --muted: #5a7494;
+  --border: rgba(255, 255, 255, 0.07);
+  --strong: rgba(255, 255, 255, 0.14);
+  --glass: rgba(15, 24, 38, 0.75);
+  --glass-strong: rgba(15, 24, 38, 0.92);
+  --footer: "#040810";
+  --text: #e8eff9;
+  --t2: #8fa5c4;
+  --t3: #5a7494;
+  --bd: rgba(255, 255, 255, 0.07);
+  --bd2: rgba(255, 255, 255, 0.13);
+  --sh1: 0 2px 12px rgba(0, 0, 0, 0.25);
+  --sh2: 0 4px 24px rgba(0, 0, 0, 0.3);
+  --sh3: 0 8px 48px rgba(0, 0, 0, 0.38);
+}
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-white: var(--white);
+  --color-off: var(--off);
+  --color-soft: var(--soft);
+  --color-off-white: var(--off-white);
+  --color-soft-grey: var(--soft-grey);
+  --color-navy: var(--navy);
+  --color-navy-mid: var(--navy-mid);
+  --color-blue: var(--blue);
+  --color-accent: var(--accent);
+  --color-accent-light: var(--accent-light);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-muted: var(--muted);
+  --color-strong: var(--strong);
+  --color-border: var(--border);
+  --color-footer: var(--footer);
+  --color-glass-strong: var(--glass-strong);
+  --color-text: var(--text);
+  --color-t2: var(--t2);
+  --color-t3: var(--t3);
+  --color-bd: var(--bd);
+  --color-bd2: var(--bd2);
+  --color-sh1: var(--sh1);
+  --color-sh2: var(--sh2);
+  --color-sh3: var(--sh3);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --animate-marquee: marquee 30s linear infinite;
+
+  --font-sans: "DM Sans", sans-serif;
+  --font-fraunces: "Fraunces", serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  background: var(--white);
+  color: var(--primary);
+  overflow-x: hidden;
+  line-height: 1.6;
+  transition:
+    background 0.3s,
+    color 0.3s;
+}
+
+.container {
+  max-width: 1100px;
+}
+
+.btn-outline {
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  padding: 13px 28px;
+  border: 1px solid var(--strong);
+  border-radius: var(--radius-full);
+  color: var(--primary);
+  transition: all 0.25s;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
