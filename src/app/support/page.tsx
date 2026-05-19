@@ -9,6 +9,7 @@ export default function Support() {
   return (
     <>
       <Hero />
+      {/* TODO:make user mood section */}
       <GuestMoodSection />
       <CheckInSection />
       <SelfHelpTools />

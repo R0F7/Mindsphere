@@ -1,81 +1,24 @@
 import Link from "next/link";
 
-export default function BlogSection() {
-  const blogs = [
-    {
-      emoji: "🧠",
-      likes: 142,
-      comments: 38,
-      category: "Mental Health",
-      title: "Why talking about anxiety is the first step toward healing",
-      avatar: "AS",
-      avatarBg: "bg-blue",
-      author: "Anika Sharma",
-      readTime: "5 min read",
-      delay: "0",
-    },
-    {
-      emoji: "🌿",
-      likes: 98,
-      comments: 21,
-      category: "Self-care",
-      title: "5 daily habits that genuinely helped my mental wellbeing",
-      avatar: "RP",
-      avatarBg: "bg-blue",
-      author: "Riya Patel",
-      readTime: "4 min read",
-      delay: "100",
-    },
-    {
-      emoji: "💬",
-      likes: 203,
-      comments: 57,
-      category: "Community",
-      title: "Finding your people: how peer support changed everything for me",
-      avatar: "LM",
-      avatarBg: "bg-[#2b6cb8]",
-      author: "Lena Marcus",
-      readTime: "6 min read",
-      delay: "200",
-    },
-    {
-      emoji: "🌬️",
-      likes: 76,
-      comments: 14,
-      category: "Mindfulness",
-      title: "Breathing through the hard moments — a beginner's guide",
-      avatar: "ST",
-      avatarBg: "bg-accent",
-      author: "Sam Torres",
-      readTime: "3 min read",
-      delay: "0",
-    },
-    {
-      emoji: "🔥",
-      likes: 189,
-      comments: 44,
-      category: "Awareness",
-      title: "Understanding teen burnout and what we can actually do about it",
-      avatar: "PN",
-      avatarBg: "bg-navy",
-      author: "Dr. Priya Nair",
-      readTime: "7 min read",
-      delay: "100",
-    },
-    {
-      emoji: "✨",
-      likes: 317,
-      comments: 82,
-      category: "Stories",
-      title: "From feeling invisible to finding a voice — my Mindsphere story",
-      avatar: "AN",
-      avatarBg: "bg-secondary",
-      author: "Anonymous",
-      readTime: "8 min read",
-      delay: "200",
-    },
-  ];
+type Blog = {
+  emoji: string;
+  likes: number;
+  comments: number;
+  category: string;
+  title: string;
+  avatar: string;
+  avatarBg: string;
+  author: string;
+  readTime: string;
+  delay: string;
+};
 
+type BlogSectionProps = {
+  title: string;
+  blogs: Blog[];
+};
+
+export default function BlogSection({ title, blogs }: BlogSectionProps) {
   return (
     <section className="w-full px-[5%] py-20" id="blog">
       <div className="mx-auto container">
@@ -98,7 +41,7 @@ export default function BlogSection() {
               </div>
 
               <h2 className="font-['Fraunces',serif] text-[1.3rem] font-normal text-primary">
-                Our Blogs
+                {title}
               </h2>
             </div>
 
