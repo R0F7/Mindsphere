@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const EVENTS = [
   {
     id: 1,
@@ -104,7 +106,8 @@ export default function UpcomingEvents() {
         {/* --- EVENT LIST --- */}
         <div className="flex flex-col gap-[15px]">
           {EVENTS.map((event, i) => (
-            <div
+            <Link
+              href="/event-detail"
               key={event.id}
               className="group relative grid grid-cols-1 md:grid-cols-[80px_1fr_auto] items-center gap-[28px] p-[28px_32px] bg-off-white border border-border rounded-xl transition-all duration-300 cursor-pointer overflow-hidden hover:-translate-y-[3px] hover:shadow-md hover:bg-white hover:border-strong"
               data-aos="fade-up"
@@ -192,7 +195,7 @@ export default function UpcomingEvents() {
                   {event.cta}
                 </button>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
