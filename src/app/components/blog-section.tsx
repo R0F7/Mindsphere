@@ -56,7 +56,8 @@ export default function BlogSection({ title, blogs }: BlogSectionProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {blogs.map((blog, index) => (
               /* .blog-card */
-              <div
+              <Link
+                href="/blog-detail"
                 key={index}
                 className="group bg-white border border-border rounded-lg overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
                 data-aos="fade-up"
@@ -114,7 +115,7 @@ export default function BlogSection({ title, blogs }: BlogSectionProps) {
                     </span>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
