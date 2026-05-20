@@ -31,7 +31,6 @@ export default function InitialScreening() {
 
   // ── ACTIONS ──
   const openLoginModal = (testName: string, type: string) => {
-    // এখানে প্রয়োজন অনুযায়ী ডাইনামিক ডেটা সেট করতে পারেন
     setModalData({
       icon: "📋",
       title: "Create an account to start",
@@ -67,7 +66,7 @@ export default function InitialScreening() {
             <h3 className="font-fraunces text-lg font-normal text-text mb-2">
               Ready to check in with yourself?
             </h3>
-            <p className="text-[0.875rem] text-t2 font-light leading-[1.65] max-w-[300px] mb-7">
+            <p className="text-[0.875rem] text-t2 font-light leading-[1.65] max-w-75 mb-7">
               This 5-question screening takes under 2 minutes and gives you a
               personalised result with suggested next steps.
             </p>

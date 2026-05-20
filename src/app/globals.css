@@ -104,9 +104,10 @@
   --color-t3: var(--t3);
   --color-bd: var(--bd);
   --color-bd2: var(--bd2);
-  --color-sh1: var(--sh1);
-  --color-sh2: var(--sh2);
-  --color-sh3: var(--sh3);
+  
+  --shadow-sh1: var(--sh1);
+  --shadow-sh2: var(--sh2);
+  --shadow-sh3: var(--sh3);
   --shadow-sm: var(--shadow-sm);
   --shadow-md: var(--shadow-md);
   --shadow-lg: var(--shadow-lg);
