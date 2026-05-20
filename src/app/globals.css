@@ -104,7 +104,7 @@
   --color-t3: var(--t3);
   --color-bd: var(--bd);
   --color-bd2: var(--bd2);
-  
+
   --shadow-sh1: var(--sh1);
   --shadow-sh2: var(--sh2);
   --shadow-sh3: var(--sh3);
@@ -156,6 +156,25 @@ body {
   background: var(--navy);
   color: var(--white);
   border-color: var(--navy);
+}
+
+.btn-p {
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 13px 28px;
+  background: var(--navy);
+  color: var(--white);
+  border-radius: var(--rf);
+  transition: all 0.25s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-p:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(13, 31, 60, 0.22);
 }
 
 @keyframes marquee {
