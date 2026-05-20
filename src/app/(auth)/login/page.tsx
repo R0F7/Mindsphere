@@ -6,13 +6,17 @@ import Link from "next/link";
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [activeDot, setActiveDot] = useState(0);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const interval = setInterval(() => {
       setActiveDot((prev) => (prev + 1) % 3);
     }, 3000);
     return () => clearInterval(interval);
   }, []);
+
+   if (!mounted) return <div className="min-h-screen bg-[#F8F9FB]" />;
 
   return (
     <section className="min-h-screen bg-off-white flex items-center justify-center p-5 md:p-8 relative overflow-hidden font-sans">
@@ -53,7 +57,7 @@ export default function LoginPage() {
             <input
               type="email"
               placeholder="Email"
-              className="w-full p-3.5 bg-[var(--soft-grey)] border-[1.5px] border-transparent rounded-[var(--radius-md)] outline-none focus:bg-white focus:border-[var(--accent)] transition-all text-sm"
+              className="w-full p-3.5 bg-soft-grey border-[1.5px] border-transparent rounded-[var(--radius-md)] outline-none focus:bg-white focus:border-[var(--accent)] transition-all text-sm"
               required
             />
             <div>
@@ -147,7 +151,7 @@ export default function LoginPage() {
         </section>
 
         {/* RIGHT SECTION (Visual Panel) */}
-        <aside className="hidden md:flex flex-col items-center justify-center relative p-10 bg-panel-bg dark:bg-primary/80 overflow-hidden">
+        <aside className="hidden md:flex flex-col items-center justify-center relative p-10 bg-[#0D1F3C] overflow-hidden">
           <div
             className="absolute inset-0 pointer-events-none opacity-[0.4]"
             style={{
@@ -226,10 +230,10 @@ export default function LoginPage() {
           </div>
 
           <div className="relative z-10 text-center max-w-[300px]">
-            <h2 className="font-fraunces text-[1.35rem] text-panel-text dark:text-[#2C313B] leading-tight mb-2.5">
+            <h2 className="font-fraunces text-[1.35rem] text-panel-text leading-tight mb-2.5">
               Manage your Money Anywhere
             </h2>
-            <p className="text-[0.82rem] text-panel-sub dark:text-[#2C313B] font-light font-sans">
+            <p className="text-[0.82rem] text-panel-sub font-light font-sans">
               You can Manage your Money on the go with Mindsphere on the web.
             </p>
           </div>
@@ -245,37 +249,6 @@ export default function LoginPage() {
           </div>
         </aside>
       </div>
-
-      <style jsx global>{`
-        @keyframes cardEntry {
-          from {
-            opacity: 0;
-            transform: translateY(28px) scale(0.97);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-          }
-        }
-        @keyframes illustFloat {
-          0%,
-          100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-10px);
-          }
-        }
-        @keyframes floatGem {
-          0%,
-          100% {
-            transform: translateY(0) rotate(12deg);
-          }
-          50% {
-            transform: translateY(-10px) rotate(12deg);
-          }
-        }
-      `}</style>
     </section>
   );
 }
