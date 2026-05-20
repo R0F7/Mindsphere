@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import React, { useState, useMemo, useEffect, useRef } from "react";
 
 // --- Types ---
@@ -448,7 +449,8 @@ export default function BlogContent() {
 // --- SUB-COMPONENTS ---
 function ArticleCard({ article, index }: { article: Article; index: number }) {
   return (
-    <div
+    <Link
+      href="/blog-detail"
       className="group bg-white border border-[var(--bd)] rounded-[var(--rx)] overflow-hidden transition-all duration-300 hover:shadow-xl cursor-pointer"
       style={{ animationDelay: `${index * 0.05}s` }}
     >
@@ -494,7 +496,7 @@ function ArticleCard({ article, index }: { article: Article; index: number }) {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
@@ -523,7 +525,13 @@ function TrendItem({
 }
 
 // --- MODALS (Simplified for logic) ---
-function NewsletterModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+function NewsletterModal({
+  isOpen,
+  onClose,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+}) {
   const [isSubscribed, setIsSubscribed] = React.useState(false);
 
   const handleClose = () => {
@@ -553,14 +561,18 @@ function NewsletterModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
         </button>
 
         {!isSubscribed ? (
-          <div id="nlContent" className="animate-in fade-in slide-in-from-bottom-2 duration-500">
+          <div
+            id="nlContent"
+            className="animate-in fade-in slide-in-from-bottom-2 duration-500"
+          >
             <div className="font-fraunces text-[1.55rem] font-light text-[var(--text)] tracking-[-.02em] mb-1.5">
               Stay connected 🌱
             </div>
             <div className="text-[0.875rem] text-[var(--t2)] font-light leading-[1.6] mb-8">
-              Get mental health tips and Mindsphere updates — once a week, never more.
+              Get mental health tips and Mindsphere updates — once a week, never
+              more.
             </div>
-            
+
             <div className="flex flex-col gap-3">
               <input
                 className="w-full px-[15px] py-3.5 border border-[var(--bd2)] rounded-[var(--rm)] text-[0.88rem] bg-[var(--white)] text-[var(--text)] outline-none focus:border-[var(--accent)] focus:shadow-[0_0_0_3px_rgba(59,130,196,0.08)] transition-all placeholder:text-[var(--t3)]"
@@ -594,7 +606,7 @@ function NewsletterModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
             <div className="text-[0.875rem] text-[var(--t2)] font-light leading-[1.6]">
               Welcome to Mindsphere. Your first newsletter is on its way.
             </div>
-            <button 
+            <button
               onClick={handleClose}
               className="mt-8 text-[0.82rem] font-medium text-[var(--accent)] hover:underline"
             >
@@ -607,7 +619,13 @@ function NewsletterModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
   );
 }
 
-function SubmitModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+function SubmitModal({
+  isOpen,
+  onClose,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+}) {
   if (!isOpen) return null;
 
   return (
@@ -635,8 +653,8 @@ function SubmitModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
             Submit an Article ✍
           </h2>
           <p className="text-[0.875rem] text-[var(--t2)] font-light leading-[1.6]">
-            Share your story, insight, or experience with the Mindsphere community. 
-            All submissions are reviewed before publishing.
+            Share your story, insight, or experience with the Mindsphere
+            community. All submissions are reviewed before publishing.
           </p>
         </div>
 
@@ -648,9 +666,14 @@ function SubmitModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
         </div>
 
         {/* Form */}
-        <form className="flex flex-col gap-3.5" onSubmit={(e) => e.preventDefault()}>
+        <form
+          className="flex flex-col gap-3.5"
+          onSubmit={(e) => e.preventDefault()}
+        >
           <div className="flex flex-col gap-1.5">
-            <label className="text-[0.78rem] font-medium text-[var(--text)]">Article Title *</label>
+            <label className="text-[0.78rem] font-medium text-[var(--text)]">
+              Article Title *
+            </label>
             <input
               type="text"
               placeholder="Give your article a compelling title"
@@ -659,7 +682,9 @@ function SubmitModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label className="text-[0.78rem] font-medium text-[var(--text)]">Category *</label>
+            <label className="text-[0.78rem] font-medium text-[var(--text)]">
+              Category *
+            </label>
             <select className="w-full px-[15px] py-3 border border-[var(--bd2)] rounded-[var(--rm)] text-[0.88rem] bg-[var(--white)] text-[var(--text)] outline-none focus:border-[var(--accent)] transition-all appearance-none cursor-pointer bg-[right_14px_center] bg-no-repeat bg-[url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2712%27 height=%2712%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%238A99AE%27 stroke-width=%272%27%3E%3Cpolyline points=%276 9 12 15 18 9%27%3E%3C/polyline%3E%3C/svg%3E')]">
               <option value="">Select a category</option>
               <option>Mental Health</option>
@@ -673,7 +698,9 @@ function SubmitModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label className="text-[0.78rem] font-medium text-[var(--text)]">Your Name *</label>
+            <label className="text-[0.78rem] font-medium text-[var(--text)]">
+              Your Name *
+            </label>
             <input
               type="text"
               placeholder="How should we credit you? (can be anonymous)"
@@ -682,7 +709,9 @@ function SubmitModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label className="text-[0.78rem] font-medium text-[var(--text)]">Your Email *</label>
+            <label className="text-[0.78rem] font-medium text-[var(--text)]">
+              Your Email *
+            </label>
             <input
               type="email"
               placeholder="We'll contact you about your submission"
@@ -691,7 +720,9 @@ function SubmitModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label className="text-[0.78rem] font-medium text-[var(--text)]">Article Content *</label>
+            <label className="text-[0.78rem] font-medium text-[var(--text)]">
+              Article Content *
+            </label>
             <textarea
               placeholder="Write your article here, or paste it in. Minimum 300 words."
               className="w-full px-[15px] py-3 border border-[var(--bd2)] rounded-[var(--rm)] text-[0.88rem] bg-[var(--white)] outline-none focus:border-[var(--accent)] transition-all min-h-[100px] resize-y leading-[1.6] placeholder:text-[var(--t3)]"
