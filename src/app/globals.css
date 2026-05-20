@@ -47,6 +47,10 @@
   --rl: 16px;
   --rx: 24px;
   --rf: 9999px;
+  --panel-bg: #111827;
+  --panel-bg2: #0f172a;
+  --panel-text: rgba(255, 255, 255, 0.92);
+  --panel-sub: rgba(255, 255, 255, 0.58);
 }
 
 [data-theme="dark"] {
@@ -104,6 +108,10 @@
   --color-t3: var(--t3);
   --color-bd: var(--bd);
   --color-bd2: var(--bd2);
+  --color-panel-bg: var(--panel-bg);
+  --color-panel-bg2: var(--panel-bg2);
+  --color-panel-text: var(--panel-text);
+  --color-panel-sub: var(--panel-sub);
 
   --shadow-sh1: var(--sh1);
   --shadow-sh2: var(--sh2);

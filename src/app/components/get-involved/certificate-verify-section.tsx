@@ -13,7 +13,6 @@ export default function CertificateVerifySection() {
         style={{
           backgroundImage: `repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(59, 130, 196, 0.015) 40px, rgba(59, 130, 196, 0.015) 41px)`,
         }}
-        // Note: For dark theme, you can wrap this in a dark: class if using tailwind strategy
       />
 
       <div className="relative z-[1] max-w-[680px] mx-auto text-center">
@@ -31,7 +30,7 @@ export default function CertificateVerifySection() {
         </h2>
 
         {/* Body */}
-        <p className="text-[0.95rem] text-[var(--text-secondary)] font-light leading-[1.72] max-w-[480px] mx-auto mb-10">
+        <p className="text-[0.95rem] text-secondary font-light leading-[1.72] max-w-[480px] mx-auto mb-10">
           Every Mindsphere certificate carries a unique ID. Use our verification
           portal to instantly confirm its authenticity, view the holder's
           details, and check its current status.

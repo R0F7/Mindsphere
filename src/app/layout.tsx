@@ -3,8 +3,6 @@ import { DM_Sans, Fraunces } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import AosProvider from "@/providers/aos-provider";
-import Footer from "./components/footer";
-import Navbar from "./components/navbar";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -33,11 +31,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${dmSans.variable} ${fraunces.variable}`}>
         <ThemeProvider>
-          <AosProvider>
-            <Navbar />
-            <main className="min-h-screen">{children}</main>
-            <Footer />
-          </AosProvider>
+          <AosProvider>{children}</AosProvider>
         </ThemeProvider>
       </body>
     </html>

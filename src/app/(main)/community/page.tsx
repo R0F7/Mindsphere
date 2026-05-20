@@ -1,10 +1,10 @@
-import BlogSection from "../components/blog-section";
-import Event from "../components/community/event";
-import FindUs from "../components/community/find-us";
-import GuideSection from "../components/community/guide-section";
-import Hero from "../components/community/hero";
-import HowToJoin from "../components/community/how-join";
-import JoinCTA from "../components/community/join-cta";
+import BlogSection from "@/app/components/blog-section";
+import Event from "@/app/components/community/event";
+import FindUs from "@/app/components/community/find-us";
+import GuideSection from "@/app/components/community/guide-section";
+import Hero from "@/app/components/community/hero";
+import HowToJoin from "@/app/components/community/how-join";
+import JoinCTA from "@/app/components/community/join-cta";
 
 export default function Community() {
   const blogs = [
