@@ -46,7 +46,7 @@ export default function BlogSection({ title, blogs }: BlogSectionProps) {
             </div>
 
             <Link
-              href="/blog"
+              href="/blogs"
               className="text-[0.85rem] font-medium text-secondary inline-flex items-center gap-1 border-b border-border pb-0.5 transition-all duration-200 hover:text-primary hover:border-primary"
             >
               View All →
