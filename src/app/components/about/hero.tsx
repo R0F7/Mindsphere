@@ -18,21 +18,6 @@ export default function Hero() {
 
       {/* --- INNER CONTENT --- */}
       <div className="relative z-1 container w-full">
-        {/* Breadcrumb */}
-        <div
-          className="flex items-center gap-2 text-[0.78rem] text-t3 mb-6"
-          data-aos="fade-up"
-        >
-          <Link
-            href="/"
-            className="text-t2 transition-colors duration-200 hover:text-text"
-          >
-            Home
-          </Link>
-          <span className="opacity-40">/</span>
-          <span className="opacity-40">About</span>
-        </div>
-
         {/* Tag */}
         <div
           className="inline-flex items-center gap-2 border border-bd2 rounded-full py-1.5 px-4 text-[0.75rem] font-medium text-t2 mb-7 bg-off-white"
@@ -46,14 +31,13 @@ export default function Hero() {
 
         {/* Heading */}
         <h1
-          className="font-fraunces text-[clamp(3rem,7vw,6.5rem)] font-light leading-[1.05] tracking-[-0.04em] text-text mb-6"
+          className="font-fraunces font-light text-[clamp(2.4rem,6vw,4.5rem)] tracking-[-0.04em] leading-[1.05] text-text mb-5"
           data-aos="fade-up"
           data-aos-delay="200"
         >
           We didn't wait for
           <br />
-          someone to{" "}
-          <em className="italic text-accent">build this.</em>
+          someone to <em className="italic text-accent">build this.</em>
           <br />
           So we did.
         </h1>

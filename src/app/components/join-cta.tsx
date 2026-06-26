@@ -43,7 +43,7 @@ export default function JoinCTA() {
 
           <Link
             href="/about"
-            className="font-['DM_Sans',sans-serif] text-[0.95rem] font-normal px-7 py-3.5 border rounded-full bg-(--btn-bg) text-(--btn-text) border-(--btn-border) transition-all duration-250 hover:bg-white hover:text-black hover:border-white"
+            className="font-['DM_Sans',sans-serif] text-[0.95rem] font-normal px-7 py-3.5 border rounded-full bg-(--btn-bg) text-(--btn-text) hover:dark:text-navy border-(--btn-border) transition-all duration-250 hover:bg-white hover:text-black hover:border-white"
             style={
               {
                 "--btn-bg": "transparent",

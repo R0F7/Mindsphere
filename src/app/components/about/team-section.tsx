@@ -18,77 +18,69 @@ const MEMBERS: Member[] = [
   {
     name: "Priya Nair",
     role: "Chief Advisor",
-    dept: "administration",
+    dept: "core",
     bg: "#0D1F3C",
   },
   {
     name: "Omar Bakr",
     role: "Operations Manager",
-    dept: "administration",
+    dept: "core",
     bg: "#1E4D8C",
   },
-  { name: "Anika Sharma", role: "HR Lead", dept: "hr", bg: "#1A3560" },
-  { name: "Jin Park", role: "People Partner", dept: "hr", bg: "#2B6CB8" },
-  { name: "Mia Chen", role: "Lead Writer", dept: "writing", bg: "#0D1F3C" },
-  { name: "Leo Rivera", role: "Blog Editor", dept: "writing", bg: "#1E4D8C" },
+  { name: "Anika Sharma", role: "HR Lead", dept: "authorities", bg: "#1A3560" },
+  { name: "Jin Park", role: "People Partner", dept: "authorities", bg: "#2B6CB8" },
+  { name: "Mia Chen", role: "Lead Writer", dept: "authorities", bg: "#0D1F3C" },
+  { name: "Leo Rivera", role: "Blog Editor", dept: "authorities", bg: "#1E4D8C" },
   {
     name: "Zara Ahmed",
     role: "Community Manager",
-    dept: "communication",
+    dept: "authorities",
     bg: "#1A3560",
   },
   {
     name: "Eli Johnson",
     role: "Outreach Lead",
-    dept: "communication",
+    dept: "authorities",
     bg: "#2B6CB8",
   },
-  { name: "Tara Singh", role: "Video Creator", dept: "content", bg: "#0D1F3C" },
+  { name: "Tara Singh", role: "Video Creator", dept: "authorities", bg: "#0D1F3C" },
   {
     name: "Noa Kim",
     role: "Content Strategist",
     dept: "content",
     bg: "#1E4D8C",
   },
-  { name: "Isla Davis", role: "UI Designer", dept: "design", bg: "#1A3560" },
+  { name: "Isla Davis", role: "UI Designer", dept: "authorities", bg: "#1A3560" },
   {
     name: "Marco Rossi",
     role: "Brand Designer",
     dept: "design",
     bg: "#2B6CB8",
   },
-  { name: "Jess Wu", role: "Marketing Lead", dept: "marketing", bg: "#0D1F3C" },
+  { name: "Jess Wu", role: "Marketing Lead", dept: "authorities", bg: "#0D1F3C" },
   {
     name: "Dani Cruz",
     role: "Growth Analyst",
-    dept: "marketing",
+    dept: "authorities",
     bg: "#1E4D8C",
   },
-  { name: "Ray Okonkwo", role: "Media Producer", dept: "media", bg: "#1A3560" },
-  { name: "Sofia Molina", role: "Photographer", dept: "media", bg: "#2B6CB8" },
-  { name: "Kai Tanaka", role: "Events Manager", dept: "events", bg: "#0D1F3C" },
+  { name: "Ray Okonkwo", role: "Media Producer", dept: "executive", bg: "#1A3560" },
+  { name: "Sofia Molina", role: "Photographer", dept: "executive", bg: "#2B6CB8" },
+  { name: "Kai Tanaka", role: "Events Manager", dept: "executive", bg: "#0D1F3C" },
   {
     name: "Nia Osei",
     role: "Event Coordinator",
-    dept: "events",
+    dept: "executive",
     bg: "#1E4D8C",
   },
-  { name: "Dev Sharma", role: "Lead Developer", dept: "it", bg: "#1A3560" },
-  { name: "Alex Petrov", role: "Backend Engineer", dept: "it", bg: "#2B6CB8" },
+  { name: "Dev Sharma", role: "Lead Developer", dept: "executive", bg: "#1A3560" },
+  { name: "Alex Petrov", role: "Backend Engineer", dept: "executive", bg: "#2B6CB8" },
 ];
 
 const DEPARTMENTS = [
   { id: "core", label: "Core" },
-  { id: "administration", label: "Administration" },
-  { id: "hr", label: "HR" },
-  { id: "writing", label: "Writing" },
-  { id: "communication", label: "Communication" },
-  { id: "content", label: "Content Creation" },
-  { id: "design", label: "Visual Design" },
-  { id: "marketing", label: "Marketing" },
-  { id: "media", label: "Media" },
-  { id: "events", label: "Events" },
-  { id: "it", label: "IT" },
+  { id: "authorities", label: "Authorities" },
+  { id: "executive", label: "Executive" },
 ];
 
 export default function TeamSection() {
@@ -156,26 +148,20 @@ export default function TeamSection() {
         >
           {filteredMembers.length > 0 ? (
             filteredMembers.map((member, i) => (
-              <div
-                key={i}
-                data-aos="fade-up"
-                data-aos-delay={i * 100}
-                className="group bg-white border border-border rounded-xl overflow-hidden shadow-sh1 transition-all duration-300 hover:-translate-y-1.25 hover:shadow-sh3"
-              >
-                {/* Photo Area */}
-                <div className="aspect-3/4 bg-linear-to-br from-soft-grey to-accent-light relative flex items-center justify-center overflow-hidden">
-                  <div className="font-fraunces text-[3rem] font-light text-blue opacity-[0.25] select-none uppercase">
-                    {getInitials(member.name)}
+              <div key={i} data-aos="fade-up" data-aos-delay={200 + i * 50}>
+                <div className="border border-border p-1.5 rounded-4xl shadow-[0_8px_30px_rgb(13,31,60,0.04)]">
+                  <div className="h-60 border border-border rounded-4xl flex items-center justify-center">
+                    <div className="font-fraunces text-[3rem] font-light text-blue opacity-[0.25] select-none uppercase">
+                      {getInitials(member.name)}
+                    </div>
                   </div>
-                </div>
-
-                {/* Info Area */}
-                <div className="p-[18px_18px_20px] text-center border-t border-border">
-                  <div className="font-fraunces text-[1rem] font-normal text-text mb-1">
-                    {member.name}
-                  </div>
-                  <div className="text-[0.78rem] text-t3 font-light uppercase tracking-wider">
-                    {member.role}
+                  <div className="ml-3.5 mt-3 mb-4">
+                    <h4 className="font-fraunces text-[1rem] font-normal text-text">
+                      {member.name}
+                    </h4>
+                    <p className="text-[0.78rem] text-t2 font-light uppercase tracking-wider">
+                      {member.role}
+                    </p>
                   </div>
                 </div>
               </div>

@@ -2,7 +2,6 @@ import React from "react";
 import ServiceCard from "./service-card";
 
 interface ServiceCard {
-  num: string;
   tag: string;
   title: string;
   body: string;
@@ -11,42 +10,36 @@ interface ServiceCard {
 
 const SERVICES: ServiceCard[] = [
   {
-    num: "01",
     tag: "Community",
     title: "Peer Support Space",
     body: "A moderated, safe community where teens talk to teens. No judgment. No clinical language. Just honest, human connection with people who actually understand.",
     link: "/community",
   },
   {
-    num: "02",
     tag: "Tools",
     title: "Self-help Tools",
     body: "Mood trackers, daily check-ins, breathing exercises, journaling prompts — tools designed around how teens actually think and feel, not how textbooks say they should.",
     link: "/support",
   },
   {
-    num: "03",
     tag: "Resources",
     title: "Resource Library",
     body: "Curated articles, guides, worksheets, and videos — all vetted for accuracy and written in a language that teenagers actually understand and connect with.",
     link: "/resources",
   },
   {
-    num: "04",
     tag: "Support",
     title: "Volunteer Helpline",
     body: "Trained teen volunteers available to listen — not diagnose, not lecture. Just be there. Plus connections to professional services for those who need more support.",
     link: "/support",
   },
   {
-    num: "05",
     tag: "Growth",
     title: "Certification Program",
     body: "We train and certify teen peer supporters, giving young people real skills and recognized credentials to support others in their communities.",
     link: "/get-involved",
   },
   {
-    num: "06",
     tag: "Awareness",
     title: "Global Campaigns",
     body: "Campaigns, events, and collaborations that push teen mental health into the conversation — locally and internationally — breaking the stigma one story at a time.",
