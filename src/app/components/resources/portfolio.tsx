@@ -143,7 +143,7 @@ export default function PortfolioSection() {
       </div>
 
       {/* --- CAROUSEL WRAPPER --- */}
-      <div className="relative -mx-[5%] px-[5%] overflow-hidden">
+      <div className="relative -mx-[5%] px-[5%]">
         <div
           ref={carouselRef}
           className="flex gap-5 transition-transform duration-500 ease-in-out will-change-transform"
@@ -154,27 +154,29 @@ export default function PortfolioSection() {
           {PORTFOLIO_ITEMS.map((item, i) => (
             <div
               key={i}
-              onClick={() => setSelectedItem(item)}
               data-aos="fade-up"
-              data-aos-delay={i * 70}
-              className={`group rc relative shrink-0 aspect-3/4 rounded-(--rl) overflow-hidden cursor-pointer
-                         transition-property[box-shadow,transform] duration-300 shadow-sh2 
-                         hover:shadow-(--sh4) hover:scale-[1.02] ${item.bg}`}
+              data-aos-delay={100 + i * 100}
+              className="aspect-3/4 shrink-0"
               style={{
                 flex: `0 0 calc(${100 / visibleCards}% - ${(20 * (visibleCards - 1)) / visibleCards}px)`,
               }}
             >
-              <div className="w-full h-full flex items-center justify-center text-[4rem] shrink-0 transition-transform duration-400 ease-[ease] group-hover:scale-[1.06]">
-                {item.em}
-              </div>
-
-              {/* Hover Overlay */}
-              <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(13,31,60,0.88)_0%,rgba(13,31,60,0.4)_50%,transparent_100%)] opacity-0 group-hover:opacity-100 transition-opacity duration-[0.35s] flex flex-col justify-end p-5">
-                <div className="font-fraunces text-[1rem] font-normal text-white leading-[1.3] mb-1 translate-y-2 group-hover:translate-y-0 transition-transform duration-[0.35s]">
-                  {item.title}
+              <div
+                onClick={() => setSelectedItem(item)}
+                className={`group rc relative w-full h-full rounded-(--rl) cursor-pointer transition-all duration-300 shadow-sh2 hover:shadow-(--sh4) hover:scale-[1.02] ${item.bg}`}
+              >
+                <div className="w-full h-full flex items-center justify-center text-[4rem] shrink-0 transition-transform duration-400 ease-[ease] group-hover:scale-[1.06]">
+                  {item.em}
                 </div>
-                <div className="text-[0.75rem] text-[rgba(255,255,255,0.65)] font-light translate-y-2 group-hover:translate-y-0 transition-transform duration-[0.35s] delay-[0.05s]">
-                  {item.cat} · {item.year}
+
+                {/* Hover Overlay */}
+                <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(13,31,60,0.88)_0%,rgba(13,31,60,0.4)_50%,transparent_100%)] opacity-0 group-hover:opacity-100 transition-opacity duration-[0.35s] flex flex-col justify-end p-5 rounded-(--rl)">
+                  <div className="font-fraunces text-[1rem] font-normal text-white leading-[1.3] mb-1 translate-y-2 group-hover:translate-y-0 transition-transform duration-[0.35s]">
+                    {item.title}
+                  </div>
+                  <div className="text-[0.75rem] text-[rgba(255,255,255,0.65)] font-light translate-y-2 group-hover:translate-y-0 transition-transform duration-[0.35s] delay-[0.05s]">
+                    {item.cat} · {item.year}
+                  </div>
                 </div>
               </div>
             </div>

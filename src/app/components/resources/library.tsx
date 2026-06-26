@@ -11,7 +11,7 @@ interface Resource {
   author: string;
   em: string;
   bg: string;
-  dl: boolean;
+  downloadUrl?: string;
 }
 
 const PER_PAGE = 8;
@@ -25,7 +25,7 @@ const RESOURCES: Resource[] = [
     author: "Clark & Beck",
     em: "📘",
     bg: "bg1",
-    dl: true,
+    downloadUrl: "/downloads/anxiety-workbook.pdf",
   },
   {
     id: 2,
@@ -35,7 +35,6 @@ const RESOURCES: Resource[] = [
     author: "Mindsphere Team",
     em: "📄",
     bg: "bg2",
-    dl: false,
   },
   {
     id: 3,
@@ -45,7 +44,6 @@ const RESOURCES: Resource[] = [
     author: "Dr. Priya Nair",
     em: "🎥",
     bg: "bg3",
-    dl: false,
   },
   {
     id: 4,
@@ -55,7 +53,7 @@ const RESOURCES: Resource[] = [
     author: "Journal of Adolescence",
     em: "🔬",
     bg: "bg4",
-    dl: true,
+    downloadUrl: "/downloads/anxiety-workbook.pdf",
   },
   {
     id: 5,
@@ -65,7 +63,7 @@ const RESOURCES: Resource[] = [
     author: "Johann Hari",
     em: "📗",
     bg: "bg5",
-    dl: true,
+    downloadUrl: "/downloads/anxiety-workbook.pdf",
   },
   {
     id: 6,
@@ -75,7 +73,6 @@ const RESOURCES: Resource[] = [
     author: "Mindsphere Team",
     em: "💬",
     bg: "bg2",
-    dl: false,
   },
   {
     id: 7,
@@ -85,7 +82,6 @@ const RESOURCES: Resource[] = [
     author: "Sam Torres",
     em: "🧘",
     bg: "bg3",
-    dl: false,
   },
   {
     id: 8,
@@ -95,7 +91,7 @@ const RESOURCES: Resource[] = [
     author: "BMC Psychiatry",
     em: "📊",
     bg: "bg1",
-    dl: true,
+    downloadUrl: "/downloads/anxiety-workbook.pdf",
   },
   {
     id: 9,
@@ -105,7 +101,7 @@ const RESOURCES: Resource[] = [
     author: "Bessel van der Kolk",
     em: "📙",
     bg: "bg4",
-    dl: true,
+    downloadUrl: "/downloads/anxiety-workbook.pdf",
   },
   {
     id: 10,
@@ -115,7 +111,6 @@ const RESOURCES: Resource[] = [
     author: "Riya Patel",
     em: "✍️",
     bg: "bg2",
-    dl: false,
   },
   {
     id: 11,
@@ -125,7 +120,6 @@ const RESOURCES: Resource[] = [
     author: "Dr. Priya Nair",
     em: "🌙",
     bg: "bg3",
-    dl: false,
   },
   {
     id: 12,
@@ -135,7 +129,7 @@ const RESOURCES: Resource[] = [
     author: "Lancet Psychiatry",
     em: "🏃",
     bg: "bg5",
-    dl: true,
+    downloadUrl: "/downloads/anxiety-workbook.pdf",
   },
   {
     id: 13,
@@ -145,7 +139,6 @@ const RESOURCES: Resource[] = [
     author: "Glennon Doyle",
     em: "📕",
     bg: "bg1",
-    dl: true,
   },
   {
     id: 14,
@@ -155,7 +148,6 @@ const RESOURCES: Resource[] = [
     author: "Mindsphere Team",
     em: "🧠",
     bg: "bg2",
-    dl: false,
   },
   {
     id: 15,
@@ -165,7 +157,7 @@ const RESOURCES: Resource[] = [
     author: "Matt Haig",
     em: "📖",
     bg: "bg4",
-    dl: true,
+    downloadUrl: "/downloads/anxiety-workbook.pdf",
   },
   {
     id: 16,
@@ -175,7 +167,6 @@ const RESOURCES: Resource[] = [
     author: "Anika Sharma",
     em: "🌿",
     bg: "bg2",
-    dl: false,
   },
   {
     id: 17,
@@ -185,7 +176,6 @@ const RESOURCES: Resource[] = [
     author: "MindEd Series",
     em: "💡",
     bg: "bg3",
-    dl: false,
   },
   {
     id: 18,
@@ -195,7 +185,7 @@ const RESOURCES: Resource[] = [
     author: "Child Development",
     em: "🤝",
     bg: "bg4",
-    dl: true,
+    downloadUrl: "/downloads/anxiety-workbook.pdf",
   },
   {
     id: 19,
@@ -205,7 +195,7 @@ const RESOURCES: Resource[] = [
     author: "Sarah Wilson",
     em: "📚",
     bg: "bg5",
-    dl: true,
+    downloadUrl: "/downloads/anxiety-workbook.pdf",
   },
   {
     id: 20,
@@ -215,7 +205,6 @@ const RESOURCES: Resource[] = [
     author: "Sam Torres",
     em: "📓",
     bg: "bg2",
-    dl: false,
   },
 ];
 
@@ -289,7 +278,7 @@ export default function ResourceLibrary() {
                   setActiveCategory(cat);
                   setCurrentPage(1);
                 }}
-                className={`cat-tab text-[0.875rem] px-6 py-4 transition-all duration-200 border-b-2 flex items-center ${
+                className={`cat-tab text-[0.875rem] px-6 py-4 transition-all duration-200 border-b-2 flex items-center cursor-pointer ${
                   activeCategory === cat
                     ? "text-navy border-navy font-medium dark:text-accent dark:border-accent"
                     : "text-t2 border-transparent hover:text-text"
@@ -317,64 +306,72 @@ export default function ResourceLibrary() {
         {/* --- GRID --- */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
           {paginatedData.map((r, i) => (
-            <div
-              key={r.id}
-              data-aos="fade-up"
-              data-aos-delay={i * 50}
-              className="rc group flex flex-col bg-white border border-bd rounded-(--rl) overflow-hidden transition-all duration-300 hover:-translate-y-[5px] hover:scale-[1.01] hover:shadow-sh3 hover:border-[rgba(59,130,196,0.2)] cursor-pointer"
-            >
-              {/* Thumbnail */}
-              <div
-                className={`rc-thumb aspect-3/2 relative flex items-center justify-center text-[2.8rem] shrink-0 ${r.bg}`}
-              >
-                <span className="relative z-1">{r.em}</span>
+            <div key={r.id} data-aos="fade-up" data-aos-delay={i * 50}>
+              <div className="rc group flex flex-col bg-white border border-bd rounded-(--rl) overflow-hidden transition-all duration-300 hover:-translate-y-[5px] hover:scale-[1.01] hover:shadow-sh3 hover:border-[rgba(59,130,196,0.2)] cursor-pointer">
+                {/* Thumbnail */}
                 <div
-                  className={`absolute top-2.5 left-2.5 z-1 text-[0.62rem] font-medium tracking-[0.08em] uppercase px-2.5 py-1 rounded-(--rf) backdrop-blur-sm text-[#fff] ${badgeConfig[r.type] || "bg-blue-500"}`}
+                  className={`rc-thumb aspect-3/2 relative flex items-center justify-center text-[2.8rem] shrink-0 ${r.bg}`}
                 >
-                  {r.type}
+                  <span className="relative z-1">{r.em}</span>
+                  <div
+                    className={`absolute top-2.5 left-2.5 z-1 text-[0.62rem] font-medium tracking-[0.08em] uppercase px-2.5 py-1 rounded-(--rf) backdrop-blur-sm text-[#fff] ${badgeConfig[r.type] || "bg-blue-500"}`}
+                  >
+                    {r.type}
+                  </div>
+                  {r.downloadUrl && (
+                    <a
+                      href={r.downloadUrl || "#"}
+                      download
+                      onClick={(e) => e.stopPropagation()}
+                      title="Download Resource"
+                      className="absolute top-2.5 right-2.5 z-1 w-7 h-7 rounded-full bg-[rgba(255,255,255,0.9)] backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-sh1"
+                    >
+                      <svg
+                        className="w-[13px] h-[13px] stroke-navy fill-none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" y1="15" x2="12" y2="3" />
+                      </svg>
+                    </a>
+                  )}
+                  <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-[rgba(13,31,60,0.08)] group-hover:opacity-0 transition-opacity" />
                 </div>
-                {r.dl && (
-                  <div className="absolute top-2.5 right-2.5 z-1 w-7 h-7 rounded-full bg-[rgba(255,255,255,0.9)] backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-sh1">
-                    <svg
-                      className="w-[13px] h-[13px] stroke-navy fill-none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                      <polyline points="7 10 12 15 17 10" />
-                      <line x1="12" y1="15" x2="12" y2="3" />
-                    </svg>
-                  </div>
-                )}
-                <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-[rgba(13,31,60,0.08)] group-hover:opacity-0 transition-opacity" />
-              </div>
 
-              {/* Body */}
-              <div className="p-4 flex-1 flex flex-col">
-                <h3 className="font-fraunces text-[0.95rem] font-normal text-text leading-[1.4] mb-[7px]">
-                  {r.title}
-                </h3>
-                <p className="text-[0.78rem] text-t2 leading-[1.6] font-light mb-3 line-clamp-2">
-                  {r.desc}
-                </p>
-                <div className="mt-auto pt-2.5 border-t border-bd flex items-center justify-between">
-                  <div className="flex items-center gap-[5px] text-[0.72rem] text-t3 font-light">
-                    <svg
-                      className="w-[11px] h-[11px] stroke-t3 fill-none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                {/* Body */}
+                <div className="p-4 flex-1 flex flex-col">
+                  <h3 className="font-fraunces text-[0.95rem] font-normal text-text leading-[1.4] mb-[7px]">
+                    {r.title}
+                  </h3>
+                  <p className="text-[0.78rem] text-t2 leading-[1.6] font-light mb-3 line-clamp-2">
+                    {r.desc}
+                  </p>
+                  <div className="mt-auto pt-2.5 border-t border-bd flex items-center justify-between">
+                    <div className="flex items-center gap-[5px] text-[0.72rem] text-t3 font-light">
+                      <svg
+                        className="w-[11px] h-[11px] stroke-t3 fill-none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                      </svg>
+                      {r.author}
+                    </div>
+                    <a
+                      href={r.downloadUrl || "#"}
+                      {...(r.downloadUrl ? { download: true } : {})}
+                      onClick={(e) => e.stopPropagation()}
+                      className="text-[0.72rem] font-medium text-accent flex items-center gap-[3px] hover:gap-1.5 transition-all cursor-pointer"
                     >
-                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                      <circle cx="12" cy="7" r="4" />
-                    </svg>
-                    {r.author}
-                  </div>
-                  <div className="text-[0.72rem] font-medium text-accent flex items-center gap-[3px] group-hover:gap-1.5 transition-all">
-                    {r.dl ? "Download" : "Read"} →
+                      {r.downloadUrl ? "Download" : "Read"} →
+                    </a>
                   </div>
                 </div>
               </div>
