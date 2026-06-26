@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const { setTheme, resolvedTheme } = useTheme();
@@ -12,6 +13,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const pathname = usePathname();
 
   useEffect(() => {
     setMounted(true);
@@ -51,7 +53,7 @@ export default function Navbar() {
         <div
           className={`mx-auto flex container items-center justify-between  w-full transition-all duration-400 ease-in-out ${
             scrolled
-              ? "mt-3 rounded-full bg-primary md:bg-[rgba(13,31,60,0.88)] px-6 py-3 shadow-[0_8px_32px_rgba(13,31,60,0.25)] backdrop-blur-xl"
+              ? "translate-y-2.5 rounded-full bg-primary md:bg-[rgba(13,31,60,0.88)] px-6 py-3 shadow-[0_8px_32px_rgba(13,31,60,0.25)] backdrop-blur-xl"
               : "px-7 py-4.5"
           }`}
         >
@@ -59,7 +61,11 @@ export default function Navbar() {
           <Link
             href="/"
             className={`font-['Fraunces',serif] text-[1.2rem] font-semibold tracking-[-0.02em] transition-colors duration-300 ${
-              scrolled ? "text-white md:text-[#fff]" : "text-primary"
+              scrolled
+                ? "text-white md:text-[#fff]"
+                : menuOpen
+                  ? "text-white md:text-primary"
+                  : "text-primary"
             }`}
           >
             Mind<span className="text-accent">sphere</span>
@@ -70,14 +76,16 @@ export default function Navbar() {
             {["Home", "Support", "Community", "Resources", "About"].map(
               (item) => {
                 const path = item === "Home" ? "/" : `/${item.toLowerCase()}`;
+                const isActive = pathname === path;
+
                 return (
                   <li key={item}>
                     <Link
                       href={path}
                       className={`relative text-[0.875rem] font-normal transition-colors duration-200 after:absolute after:-bottom-1 after:left-0 after:right-0 after:h-[1.5px] after:origin-left after:scale-x-0 after:bg-accent after:transition-transform after:duration-250 hover:after:scale-x-1 ${
                         scrolled
-                          ? "text-[rgba(255,255,255,0.7)] hover:text-white"
-                          : "text-secondary hover:text-text-primary"
+                          ? `${isActive ? "text-[rgba(255,255,255)] after:scale-x-1 font-semibold" : "text-[rgba(255,255,255,0.7)]"} hover:text-white`
+                          : `hover:text-primary ${isActive ? "text-primary after:scale-x-1 font-semibold" : "text-secondary"}`
                       }`}
                     >
                       {item}
@@ -147,17 +155,19 @@ export default function Navbar() {
       </nav>
 
       <div
-        className={`fixed inset-0 z-999 flex flex-col items-center justify-center gap-2 bg-primary backdrop-blur-[20px] transition-all duration-350 ease-in-out ${
+        className={`fixed md:hidden inset-0 z-999 flex flex-col items-center justify-center gap-2 bg-primary backdrop-blur-[20px] transition-all duration-350 ease-in-out ${
           menuOpen ? "visible opacity-100" : "invisible opacity-0"
         }`}
       >
         {["Home", "Support", "Community", "Resources", "About"].map((item) => {
           const path = item === "Home" ? "/" : `/${item.toLowerCase()}`;
+          const isActive = pathname === path;
+
           return (
             <Link
               key={item}
               href={path}
-              className="font-['Fraunces',serif] text-2xl font-light text-white/80 py-3 transition-colors duration-200 hover:text-white"
+              className={`font-['Fraunces',serif] text-2xl font-light ${isActive ? "text-white font-medium after:scale-x-1" : "text-white/80"}  py-3 transition-colors duration-200 hover:text-white`}
               onClick={() => setMenuOpen(false)}
             >
               {item}
