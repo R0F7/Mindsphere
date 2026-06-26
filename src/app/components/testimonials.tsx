@@ -92,9 +92,12 @@ export default function Testimonials() {
           <div className="text-xs uppercase tracking-widest text-accent mb-2 font-medium">
             Community voices
           </div>
-          <h2 className="font-fraunces text-3xl md:text-4xl font-normal text-primary">
+          {/* <h2 className="font-fraunces text-3xl md:text-4xl font-normal text-primary">
             What teens are{" "}
             <em className="italic font-light text-accent">saying</em>
+          </h2> */}
+          <h2 className="font-['Fraunces',serif] text-[clamp(2rem,4vw,3rem)] font-light tracking-tight leading-[1.1] text-primary mb-4">
+            What teens are <em className="text-accent italic">saying</em>
           </h2>
         </div>
       </div>

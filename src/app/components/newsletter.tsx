@@ -34,40 +34,50 @@ export default function Newsletter() {
           <div className="newsletter-inner reveal max-w-140 mx-auto text-center">
             <div
               data-aos="fade-up"
+              data-aos-duration="200"
               className="s-label text-[0.78rem] font-medium text-accent tracking-widest uppercase"
             >
               Stay connected
             </div>
             <h2
               data-aos="fade-up"
+              data-aos-duration="300"
               className="s-title font-fraunces text-[clamp(1.8rem,4vw,2.8rem)] font-light tracking-[-0.03em] text-primary mb-3"
             >
               Stay in the <em className="italic text-accent">loop</em>
             </h2>
             <p
               data-aos="fade-up"
+              data-aos-duration="350"
               className="newsletter-body text-[1rem] text-secondary font-light leading-[1.7] mb-9"
             >
               Get weekly mental health tips, Mindsphere updates, community
               highlights, and event announcements — delivered to your inbox. No
               spam, ever.
             </p>
-            <button
-              data-aos="fade-up"
-              type="button"
-              className="newsletter-btn text-[0.95rem] font-medium p-[15px_36px] bg-navy text-white rounded-full transition-all duration-250 inline-flex items-center gap-2.5 hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(13,31,60,0.2)]"
-              onClick={handleOpenModal}
+            <div data-aos="fade-up" 
+              data-aos-duration="400"
             >
-              <svg
-                className="w-4 h-4 stroke-white fill-none stroke-2 stroke-round stroke-linejoin"
-                viewBox="0 0 24 24"
+              <button
+                type="button"
+                className="newsletter-btn text-[0.95rem] font-medium p-[15px_36px] bg-navy text-white rounded-full transition-all duration-250 inline-flex items-center gap-2.5 hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(13,31,60,0.2)]"
+                onClick={handleOpenModal}
               >
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                <polyline points="22,6 12,13 2,6" />
-              </svg>
-              Subscribe to newsletter
-            </button>
-            <div data-aos="fade-up" className="newsletter-note text-[0.75rem] text-muted mt-3.5 font-light">
+                <svg
+                  className="w-4 h-4 stroke-white fill-none stroke-2 stroke-round stroke-linejoin"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                  <polyline points="22,6 12,13 2,6" />
+                </svg>
+                Subscribe to newsletter
+              </button>
+            </div>
+            <div
+              data-aos="fade-up"
+              data-aos-duration="450"
+              className="newsletter-note text-[0.75rem] text-muted mt-3.5 font-light"
+            >
               No spam. Unsubscribe anytime.
             </div>
           </div>

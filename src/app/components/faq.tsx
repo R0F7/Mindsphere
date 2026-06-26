@@ -43,10 +43,11 @@ export default function FAQ() {
     <section className="bg-off-white w-full py-25 px-[5%]">
       <div className="max-w-170 mx-auto">
         <div className="text-center mb-12" data-aos="fade-up">
-          <h2 className="font-sans text-3xl font-normal text-primary mb-2">
+          <h2 className="font-['Fraunces',serif] text-[clamp(2rem,4vw,3rem)] font-light tracking-tight leading-[1.1] text-primary mb-2">
             FAQ
           </h2>
-          <p className="text-[0.9rem] text-muted font-light">
+
+          <p className="text-[1rem] text-secondary font-light">
             Get quick answers to your questions.
             <br />
             To understand more, contact us.
