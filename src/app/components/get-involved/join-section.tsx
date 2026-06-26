@@ -12,13 +12,20 @@ export default function JoinSection() {
 
       <div className="relative z-[1] max-w-[760px] mx-auto">
         {/* Recruitment Badge */}
-        <div className="inline-flex items-center gap-2 text-[0.72rem] font-medium tracking-[0.1em] uppercase text-[var(--accent)] bg-[var(--accent-light)] border border-[rgba(59,130,196,0.2)] rounded-full px-4 py-1.5 mb-7">
+        <div
+          data-aos="fade-up"
+          className="inline-flex items-center gap-2 text-[0.72rem] font-medium tracking-[0.1em] uppercase text-[var(--accent)] bg-[var(--accent-light)] border border-[rgba(59,130,196,0.2)] rounded-full px-4 py-1.5 mb-7"
+        >
           <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] animate-[pulse_2s_ease_infinite]" />
           Now welcoming new members
         </div>
 
         {/* Title */}
-        <h2 className="font-fraunces text-[clamp(2rem,5vw,3.6rem)] font-light leading-[1.1] tracking-[-0.035em] text-[var(--text-primary)] mb-5">
+        <h2
+          data-aos="fade-up"
+          data-aos-delay="100"
+          className="font-fraunces text-[clamp(2rem,5vw,3.6rem)] font-light leading-[1.1] tracking-[-0.035em] text-[var(--text-primary)] mb-5"
+        >
           Your Voice
           <br />
           Belongs{" "}
@@ -26,18 +33,23 @@ export default function JoinSection() {
         </h2>
 
         {/* Body Text */}
-        <p className="text-[1.05rem] text-[var(--text-secondary)] font-light leading-[1.75] max-w-[560px] mx-auto mb-9">
+        <p
+          data-aos="fade-up"
+          data-aos-delay="200"
+          className="text-[1.05rem] text-[var(--text-secondary)] font-light leading-[1.75] max-w-[560px] mx-auto mb-9"
+        >
           Mindsphere is built by teenagers, for teenagers. Whether you want to
           volunteer, create content, support peers, or simply be part of a
           community that truly understands — there is a place here for you.
         </p>
 
         {/* Call to Action Buttons */}
-        <div className="flex flex-wrap items-center justify-center gap-3.5 mb-12">
-          <Link
-            href="/waitlist"
-            className="btn-p"
-          >
+        <div
+          data-aos="fade-up"
+          data-aos-delay="250"
+          className="flex flex-wrap items-center justify-center gap-3.5 mb-12"
+        >
+          <Link href="/waitlist" className="btn-p">
             Join the Waitlist
             <svg
               width="14"
@@ -54,16 +66,17 @@ export default function JoinSection() {
             </svg>
           </Link>
 
-          <Link
-            href="/about"
-            className="btn-outline"
-          >
+          <Link href="/about" className="btn-outline">
             Learn About Us
           </Link>
         </div>
 
         {/* Stats Row */}
-        <div className="flex flex-wrap items-center justify-center gap-0 px-9 py-7 bg-[var(--off-white)] border border-[var(--border)] rounded-[var(--radius-xl)] max-w-[560px] mx-auto shadow-[var(--shadow-sm)]">
+        <div
+          data-aos="fade-up"
+          data-aos-delay="300"
+          className="flex flex-wrap items-center justify-center gap-0 px-9 py-7 bg-[var(--off-white)] border border-[var(--border)] rounded-[var(--radius-xl)] max-w-[560px] mx-auto shadow-[var(--shadow-sm)]"
+        >
           {[
             { num: "2.4k+", label: "Community members" },
             { num: "18+", label: "Countries reached" },

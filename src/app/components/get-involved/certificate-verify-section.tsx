@@ -17,12 +17,19 @@ export default function CertificateVerifySection() {
 
       <div className="relative z-[1] max-w-[680px] mx-auto text-center">
         {/* Icon */}
-        <div className="w-16 h-16 rounded-[var(--radius-lg)] bg-[var(--accent-light)] border border-[rgba(59,130,196,0.2)] flex items-center justify-center mx-auto mb-7 text-[1.6rem]">
+        <div
+          data-aos="fade-up"
+          className="w-16 h-16 rounded-[var(--radius-lg)] bg-[var(--accent-light)] border border-[rgba(59,130,196,0.2)] flex items-center justify-center mx-auto mb-7 text-[1.6rem]"
+        >
           🎓
         </div>
 
         {/* Title */}
-        <h2 className="font-fraunces text-[clamp(1.8rem,4vw,2.8rem)] font-light tracking-[-0.03em] text-[var(--text-primary)] mb-3.5">
+        <h2
+          data-aos="fade-up"
+          data-aos-delay="200"
+          className="font-fraunces text-[clamp(1.8rem,4vw,2.8rem)] font-light tracking-[-0.03em] text-[var(--text-primary)] mb-3.5"
+        >
           Verify a{" "}
           <em className="italic text-[var(--accent)] not-italic">
             Certificate
@@ -30,7 +37,11 @@ export default function CertificateVerifySection() {
         </h2>
 
         {/* Body */}
-        <p className="text-[0.95rem] text-secondary font-light leading-[1.72] max-w-[480px] mx-auto mb-10">
+        <p
+          data-aos="fade-up"
+          data-aos-delay="250"
+          className="text-[0.95rem] text-secondary font-light leading-[1.72] max-w-[480px] mx-auto mb-10"
+        >
           Every Mindsphere certificate carries a unique ID. Use our verification
           portal to instantly confirm its authenticity, view the holder's
           details, and check its current status.
@@ -38,6 +49,8 @@ export default function CertificateVerifySection() {
 
         {/* Verify Button */}
         <Link
+          data-aos="fade-up"
+          data-aos-delay="300"
           href="/verify-certificate"
           className="group inline-flex items-center gap-2.5 px-9 py-3.5 bg-[var(--navy)] dark:bg-[var(--accent)] text-white text-[0.95rem] font-medium rounded-full border-none cursor-pointer transition-all duration-250 shadow-[var(--shadow-md)] hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(13,31,60,0.22)]"
         >
