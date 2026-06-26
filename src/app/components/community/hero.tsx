@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Hero() {
   return (
-    <section className="md:min-h-screen display-flex flex items-center relative overflow-hidden bg-white dark:bg-dark-bg pt-27.5 md:pt-35 pb-16 md:pb-20 px-[5%]">
+    <section className="display-flex flex items-center relative overflow-hidden bg-white dark:bg-dark-bg pt-27.5 md:pt-35 pb-16 md:pb-20 px-[5%]">
       {/* ── HERO GRID BACKGROUND ── */}
       <div
         className="absolute inset-0 opacity-50 pointer-events-none"
@@ -34,22 +34,6 @@ export default function Hero() {
 
       {/* ── HERO INNER CONTAINER ── */}
       <div className="relative z-10 container w-full text-center">
-        {/* Breadcrumb */}
-        <div
-          data-aos="fade-up"
-          data-aos-duration="400"
-          className="flex items-center gap-2 justify-center text-[0.78rem] text-t3 mb-6 reveal"
-        >
-          <Link
-            href="/"
-            className="text-t2 transition-colors duration-200 hover:text-text"
-          >
-            Home
-          </Link>
-          <span className="opacity-40">/</span>
-          <span className="opacity-40">Community</span>
-        </div>
-
         {/* Hero Tag */}
         <div
           data-aos="fade-up"
@@ -63,13 +47,15 @@ export default function Hero() {
 
         {/* Main Heading */}
         <h1
+          className="font-fraunces text-[clamp(2.4rem,6vw,4.2rem)] font-light tracking-[-0.04em] line-clamp-none leading-[1.08] text-text mb-4.5"
           data-aos="fade-up"
-          data-aos-duration="550"
-          className="font-fraunces font-light leading-[1.05] tracking-[-0.04em] text-text mb-5 text-[clamp(2.5rem,7vw,6.5rem)] reveal d2"
+          data-aos-delay="100"
         >
           You don't have to go
-          <br />
-          through <em className="not-italic text-accent">this alone.</em>
+          <br /> through {""}
+          <em className="italic font-light text-accent font-fraunces">
+            this alone.
+          </em>
         </h1>
 
         {/* Subtitle */}
@@ -86,7 +72,7 @@ export default function Hero() {
         <div
           data-aos="fade-up"
           data-aos-duration="650"
-          className="flex gap-3 justify-center flex-wrap mb-16 reveal d4"
+          className="flex gap-3 justify-center flex-wrap mb-10 reveal d4"
         >
           <Link
             href="#discord"

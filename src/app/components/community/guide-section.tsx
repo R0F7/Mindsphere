@@ -105,9 +105,9 @@ export default function GuideSection() {
             </div>
 
             {/* Floating Dynamic Video Label */}
-            <div className="absolute bottom-5 left-1/2 -translate-x-1/2 bg-[rgba(13,31,60,0.8)] backdrop-blur-md border border-[rgba(255,255,255,0.1)] rounded-(--rf) padding px-4 py-2 text-[0.78rem] text-[rgba(255,255,255,0.8)] whitespace-nowrap select-none transition-all duration-200">
+            {/* <div className="absolute bottom-5 left-1/2 -translate-x-1/2 bg-[rgba(13,31,60,0.8)] backdrop-blur-md border border-[rgba(255,255,255,0.1)] rounded-(--rf) padding px-4 py-2 text-[0.78rem] text-[rgba(255,255,255,0.8)] whitespace-nowrap select-none transition-all duration-200">
               {guideLabels[activeTab]}
-            </div>
+            </div> */}
           </div>
         </div>
 
