@@ -1,4 +1,6 @@
 import Link from "next/link";
+import PrimaryButton from "../primary-button";
+import OutlineButton from "../outline-button";
 
 export default function Hero() {
   return (
@@ -71,18 +73,10 @@ export default function Hero() {
           </div>
 
           <div className="flex items-center gap-2 shrink-0">
-            <Link
-              href="/login"
-              className="text-[0.82rem] font-medium px-4.5 py-2 rounded-full bg-navy text-white transition-all duration-220 hover:opacity-85"
-            >
+            <PrimaryButton href="/login" className="text-[0.82rem] px-4.5 py-2">
               Log in
-            </Link>
-            <Link
-              href="/signup"
-              className="text-[0.82rem] font-medium px-4.5 py-2 rounded-full border border-strong text-text bg-transparent transition-all duration-220 hover:bg-soft"
-            >
-              Sign up free
-            </Link>
+            </PrimaryButton>
+            <OutlineButton href="/signup" className="text-[0.82rem] px-4.5 py-2">Sign up free</OutlineButton>
           </div>
         </div>
       </div>

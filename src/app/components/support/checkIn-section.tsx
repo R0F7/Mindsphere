@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import SectionHeader from "./section-header";
+import OutlineButton from "../outline-button";
+import PrimaryButton from "../primary-button";
 
 interface MentalTest {
   id: string;
@@ -31,7 +33,10 @@ export default function CheckInSection() {
     testName: "",
   });
 
-  const openLoginModal = (testName: string, type: "screening" | "general" = "general") => {
+  const openLoginModal = (
+    testName: string,
+    type: "screening" | "general" = "general",
+  ) => {
     const icon = type === "screening" ? "📋" : "🧠";
     const sub =
       type === "screening"
@@ -63,9 +68,11 @@ export default function CheckInSection() {
   }, [isOpen]);
 
   return (
-    <section className="bg-white dark:bg-dark-bg w-full px-4 md:px-[5%] py-20 overflow-hidden" id="checkin">
+    <section
+      className="bg-white dark:bg-dark-bg w-full px-4 md:px-[5%] py-20 overflow-hidden"
+      id="checkin"
+    >
       <div className="mx-auto container w-full">
-        
         {/* ── SECTION HEADER ── */}
         <SectionHeader
           label="Reflect & assess"
@@ -76,25 +83,38 @@ export default function CheckInSection() {
 
         {/* ── TESTS GRID ── */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 w-full">
-          {mentalTests.map((test) => (
-            <button
-              key={test.id}
-              onClick={() => openLoginModal(test.name, test.type || "general")}
-              className="group relative flex items-center justify-between p-[18px_22px] bg-navy text-white rounded-full overflow-hidden cursor-pointer text-left w-full border-none outline-none select-none transition-all duration-280 hover:bg-blue hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(13,31,60,0.25)] before:absolute before:inset-0 before:bg-[linear-gradient(135deg,rgba(255,255,255,0.06),transparent)] before:pointer-events-none"
-              data-aos="fade-up"
-            >
-              {/* Test Name */}
-              <span className="text-[0.8rem] font-medium tracking-widest uppercase text-white leading-[1.3] z-10">
-                {test.name}
-              </span>
+          {mentalTests.map((test, i) => (
+            <div key={test.id} data-aos="fade-up" data-aos-delay={100 + i * 50}>
+              <button
+                onClick={() =>
+                  openLoginModal(test.name, test.type || "general")
+                }
+                className="group relative flex items-center justify-between p-[18px_22px] bg-navy text-white rounded-full overflow-hidden cursor-pointer text-left w-full border-none outline-none select-none transition-all duration-280 hover:bg-blue hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(13,31,60,0.25)] before:absolute before:inset-0 before:bg-[linear-gradient(135deg,rgba(255,255,255,0.06),transparent)] before:pointer-events-none"
+              >
+                {/* Test Name */}
+                <span className="text-[0.8rem] font-medium tracking-widest uppercase text-white leading-[1.3] z-10">
+                  {test.name}
+                </span>
 
-              {/* Action Icon Container */}
-              <div className="w-7 h-7 rounded-full border-[1.5px] border-[rgba(255,255,255,0.3)] flex items-center justify-center text-white/80 text-base shrink-0 z-10 transition-all duration-220 group-hover:bg-[rgba(255,255,255,0.15)] group-hover:border-[rgba(255,255,255,0.5)]">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3.5 h-3.5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                </svg>
-              </div>
-            </button>
+                {/* Action Icon Container */}
+                <div className="w-7 h-7 rounded-full border-[1.5px] border-[rgba(255,255,255,0.3)] flex items-center justify-center text-white/80 text-base shrink-0 z-10 transition-all duration-220 group-hover:bg-[rgba(255,255,255,0.15)] group-hover:border-[rgba(255,255,255,0.5)]">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2}
+                    stroke="currentColor"
+                    className="w-3.5 h-3.5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                    />
+                  </svg>
+                </div>
+              </button>
+            </div>
           ))}
         </div>
       </div>
@@ -122,7 +142,9 @@ export default function CheckInSection() {
 
           {/* Modal top banner */}
           <div className="bg-[linear-gradient(135deg,var(--navy)_0%,#1E4D8C_100%)] p-[32px_36px_28px] text-center relative overflow-hidden before:absolute before:w-50 before:h-50 before:rounded-full before:border before:border-white/6 before:-top-15 before:-right-15 after:absolute after:w-35 after:after:h-35 after:rounded-full after:border after:border-white/4 after:-bottom-10 after:-left-10">
-            <div className="text-[2.4rem] mb-2.5 relative z-10">{modalData.icon}</div>
+            <div className="text-[2.4rem] mb-2.5 relative z-10">
+              {modalData.icon}
+            </div>
             <div className="font-fraunces text-[1.3rem] font-light text-white tracking-tight mb-1.5 relative z-10">
               {modalData.title}
             </div>
@@ -137,29 +159,25 @@ export default function CheckInSection() {
           {/* Modal body */}
           <div className="p-[28px_36px_32px]">
             <div className="flex flex-col gap-2.5 mb-4.5">
-              <Link
-                href="/login"
-                className="w-full padding p-3.5 text-center bg-navy text-white rounded-md text-[0.9rem] font-medium transition-all duration-220 shadow-[0_4px_14px_rgba(13,31,60,0.18)] hover:opacity-88 hover:-translate-y-px"
-              >
+              <PrimaryButton href="/login" className="rounded-md text-center">
                 Log in to continue →
-              </Link>
-              
+              </PrimaryButton>
+
               {/* OR Divider */}
               <div className="flex items-center gap-3 my-1">
                 <div className="flex-1 h-px bg-bd" />
-                <div className="text-[0.75rem] text-t3 font-light">Don't have an account?</div>
+                <div className="text-[0.75rem] text-t3 font-light">
+                  Don't have an account?
+                </div>
                 <div className="flex-1 h-px bg-bd" />
               </div>
-
-              <Link
-                href="/signup"
-                className="w-full p-3.5 text-center border border-bd2 text-text rounded-md text-[0.9rem] font-normal bg-transparent transition-all duration-220 hover:bg-soft"
-              >
+              <OutlineButton href="/signup" className="rounded-md text-center">
                 Create a free account
-              </Link>
+              </OutlineButton>
             </div>
             <div className="text-[0.72rem] text-t3 text-center leading-normal font-light">
-              It's completely free and takes less than a minute. Your data is always private.
+              It's completely free and takes less than a minute. Your data is
+              always private.
             </div>
           </div>
         </div>

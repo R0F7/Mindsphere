@@ -1,4 +1,5 @@
-import Link from "next/link";
+import PrimaryButton from "../primary-button";
+import OutlineButton from "../outline-button";
 
 export default function GuestMoodSection() {
   const previewMoods = [
@@ -22,10 +23,7 @@ export default function GuestMoodSection() {
       {/* ── SECTION INNER CONTAINER ── */}
       <div className="mx-auto container w-full">
         {/* Section Header */}
-        <div
-          className="max-w-155 mb-14"
-          data-aos="fade-up"
-        >
+        <div className="max-w-155 mb-14" data-aos="fade-up">
           <div className="text-[0.75rem] font- tracking-widest text-accent uppercase mb-2">
             Daily ritual
           </div>
@@ -79,18 +77,18 @@ export default function GuestMoodSection() {
               </p>
 
               <div className="flex items-center gap-2 flex-wrap justify-center mt-1">
-                <Link
+                <PrimaryButton
                   href="/login"
-                  className="text-[0.82rem] font-medium px-4.5 py-2 bg-navy text-white rounded-full transition-all duration-220 hover:opacity-85"
+                  className="text-[0.82rem] px-4.5 py-2"
                 >
                   Log in
-                </Link>
-                <Link
+                </PrimaryButton>
+                <OutlineButton
                   href="/signup"
-                  className="text-[0.82rem] font-medium px-4.5 py-2 border border-bd2 text-text bg-transparent rounded-full transition-all duration-220 hover:bg-soft"
+                  className="text-[0.82rem] px-4.5 py-2"
                 >
                   Sign up free
-                </Link>
+                </OutlineButton>
               </div>
             </div>
           </div>
@@ -188,18 +186,18 @@ export default function GuestMoodSection() {
 
             {/* Call To Actions */}
             <div className="flex gap-2.5 flex-wrap">
-              <Link
+              <PrimaryButton
                 href="/signup"
-                className="text-[0.88rem] font-medium px-5 py-2.5 bg-navy text-white rounded-full transition-all duration-220 hover:opacity-85"
+                className="text-[0.88rem] px-5 py-2.5"
               >
                 Create free account →
-              </Link>
-              <Link
+              </PrimaryButton>
+              <OutlineButton
                 href="/login"
-                className="text-[0.88rem] font-medium px-5 py-2.5 border border-bd2 text-text bg-transparent rounded-full transition-all duration-220 hover:bg-soft"
+                className="text-[0.88rem] px-5 py-2.5"
               >
                 Already have an account
-              </Link>
+              </OutlineButton>
             </div>
           </div>
         </div>

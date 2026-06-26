@@ -197,7 +197,7 @@ export default function EventsSection() {
             className="text-center p-12 bg-white border border-border rounded-xl max-w-xl mx-auto shadow-sm"
             data-aos="fade-up"
           >
-            <div className="w-12 h-12 bg-[var(--soft-grey)] rounded-full flex items-center justify-center mx-auto mb-4 opacity-70">
+            <div className="w-12 h-12 bg-soft-grey rounded-full flex items-center justify-center mx-auto mb-4 opacity-70">
               <svg
                 viewBox="0 0 24 24"
                 className="w-6 h-6 stroke-accent fill-none stroke-[1.5]"
@@ -217,7 +217,6 @@ export default function EventsSection() {
           </div>
         )}
 
-        {/* Nicher bottom link tabe thakbe jate cold state-eo purono link visit kora jay */}
         <div className="text-center mt-9" data-aos="fade-up">
           <Link href="/events" className="btn-outline inline-block">
             See all past events →

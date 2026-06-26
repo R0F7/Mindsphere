@@ -194,6 +194,7 @@ export default function SelfHelpTools() {
         <div
           className="flex items-center gap-1.5 flex-wrap mb-9"
           data-aos="fade-up"
+          data-aos-duration="400"
         >
           {TOOL_CATS.map((cat) => (
             <button
@@ -216,48 +217,41 @@ export default function SelfHelpTools() {
           {filteredTools.map((tool, index) => (
             <div
               key={tool.id}
-              onClick={() => openTool(tool)}
-              style={
-                {
-                  transitionDelay: `${index * 0.05}s`,
-                  borderColor: "var(--bd)",
-                  "--gradient-bg":
-                    "linear-gradient(90deg, var(--navy), var(--accent))",
-                } as React.CSSProperties
-              }
-              className="group relative flex flex-col gap-3.5 p-6 bg-white dark:bg-dark-card border rounded-2xl cursor-pointer overflow-hidden select-none
-       transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform
-       hover:-translate-y-1.5 hover:shadow-[0_12px_30px_rgba(13,31,60,0.08)] dark:hover:shadow-[0_12px_30px_rgba(0,0,0,0.25)]
-      
-       after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.75 
-       after:bg-(image:--gradient-bg)
-       after:scale-x-0 after:origin-left after:transition-transform after:duration-350 after:ease-in-out
-       hover:after:scale-x-1"
               data-aos="fade-up"
+              data-aos-duration={200 + index * 50}
+              className="h-full"
             >
-              {/* Tool Icon */}
-              <div className="w-11 h-11 rounded-xl bg-accent-light flex items-center justify-center text-[1.2rem] shrink-0">
-                {tool.icon}
-              </div>
+              <div
+                onClick={() => openTool(tool)}
+                style={
+                  {
+                    borderColor: "var(--bd)",
+                    "--gradient-bg":
+                      "linear-gradient(90deg, var(--navy), var(--accent))",
+                  } as React.CSSProperties
+                }
+                className="h-full group relative flex flex-col gap-3.5 p-6 bg-white dark:bg-dark-card border rounded-2xl cursor-pointer overflow-hidden select-none transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform hover:-translate-y-1.5 hover:shadow-[0_12px_30px_rgba(13,31,60,0.08)] dark:hover:shadow-[0_12px_30px_rgba(0,0,0,0.25)]"
+              >
+                <div className="w-11 h-11 rounded-xl bg-accent-light flex items-center justify-center text-[1.2rem] shrink-0">
+                  {tool.icon}
+                </div>
 
-              {/* Tool Title */}
-              <h3 className="font-fraunces text-base font-normal text-text leading-tight">
-                {tool.title}
-              </h3>
+                <h3 className="font-fraunces text-base font-normal text-text leading-tight">
+                  {tool.title}
+                </h3>
 
-              {/* Tool Description */}
-              <p className="text-[0.82rem] text-t2 font-light leading-relaxed flex-1">
-                {tool.desc}
-              </p>
+                <p className="text-[0.82rem] text-t2 font-light leading-relaxed flex-1">
+                  {tool.desc}
+                </p>
 
-              {/* Tool Footer */}
-              <div className="flex items-center justify-between pt-3 border-t border-bd mt-1">
-                <span className="text-[0.65rem] font-medium tracking-[0.07em] uppercase text-accent bg-accent-light p-[3px_10px] rounded-full">
-                  {tool.cat}
-                </span>
-                <span className="text-[0.8rem] text-t3 transition-transform duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:text-text group-hover:translate-x-1">
-                  →
-                </span>
+                <div className="flex items-center justify-between pt-3 border-t border-bd mt-1">
+                  <span className="text-[0.65rem] font-medium tracking-[0.07em] uppercase text-accent bg-accent-light p-[3px_10px] rounded-full">
+                    {tool.cat}
+                  </span>
+                  <span className="text-[0.8rem] text-t3 transition-transform duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:text-text group-hover:translate-x-1">
+                    →
+                  </span>
+                </div>
               </div>
             </div>
           ))}
