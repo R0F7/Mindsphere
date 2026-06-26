@@ -150,14 +150,14 @@ export default function AboutSection() {
               </div>
             </div>
 
-            <Link
-              data-aos="fade-up-left"
-              data-aos-duration="500"
-              href="/about"
-              className="inline-flex items-center gap-2 text-[0.9rem] font-medium rounded-full bg-navy px-7 py-3.25 text-white transition-all duration-250 hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(13,31,60,0.22)]"
-            >
-              Know More →
-            </Link>
+            <div data-aos="fade-up-left" data-aos-duration="500">
+              <Link
+                href="/about"
+                className="inline-flex items-center gap-2 text-[0.9rem] font-medium rounded-full bg-navy px-7 py-3.25 text-white transition-all duration-250 hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(13,31,60,0.22)]"
+              >
+                Know More →
+              </Link>
+            </div>
           </div>
         </div>
       </div>

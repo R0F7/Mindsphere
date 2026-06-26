@@ -56,66 +56,70 @@ export default function BlogSection({ title, blogs }: BlogSectionProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {blogs.map((blog, index) => (
               /* .blog-card */
-              <Link
-                href="/blog-detail"
+              <div
                 key={index}
-                className="group bg-white border border-border rounded-lg overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
                 data-aos="fade-up"
                 data-aos-delay={blog.delay}
+                className="h-full"
               >
-                <div className="w-full aspect-video overflow-hidden bg-[linear-gradient(135deg,var(--soft-grey),var(--accent-light))] relative">
-                  <div className="w-full h-full flex items-center justify-center text-3xl opacity-30 select-none">
-                    {blog.emoji}
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-3.5 px-4 pt-2.5">
-                  <span className="flex items-center gap-1 text-[0.75rem] text-muted">
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="w-3.5 h-3.5 stroke-muted fill-none stroke-[1.8] stroke-linecap-round stroke-linejoin-round"
-                    >
-                      <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z" />
-                    </svg>
-                    {blog.likes}
-                  </span>
-                  <span className="flex items-center gap-1 text-[0.75rem] text-muted">
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="w-3.5 h-3.5 stroke-muted fill-none stroke-[1.8] stroke-linecap-round stroke-linejoin-round"
-                    >
-                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                    </svg>
-                    {blog.comments}
-                  </span>
-                </div>
-
-                <div className="p-[12px_16px_16px]">
-                  <div className="text-[0.68rem] font-medium tracking-[0.08em] uppercase text-accent mb-1.5">
-                    {blog.category}
+                <Link
+                  href="/blog-detail"
+                  className="group block bg-white border border-border rounded-lg overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-md will-change-transform"
+                >
+                  <div className="w-full aspect-video overflow-hidden bg-[linear-gradient(135deg,var(--soft-grey),var(--accent-light))] relative">
+                    <div className="w-full h-full flex items-center justify-center text-3xl opacity-30 select-none">
+                      {blog.emoji}
+                    </div>
                   </div>
 
-                  <h3 className="font-['Fraunces',serif] text-[0.95rem] font-normal text-primary leading-[1.45] mb-3 line-clamp-2 min-h-[2.9em]">
-                    {blog.title}
-                  </h3>
+                  <div className="flex items-center gap-3.5 px-4 pt-2.5">
+                    <span className="flex items-center gap-1 text-[0.75rem] text-muted">
+                      <svg
+                        viewBox="0 0 24 24"
+                        className="w-3.5 h-3.5 stroke-muted fill-none stroke-[1.8] stroke-linecap-round stroke-linejoin-round"
+                      >
+                        <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z" />
+                      </svg>
+                      {blog.likes}
+                    </span>
+                    <span className="flex items-center gap-1 text-[0.75rem] text-muted">
+                      <svg
+                        viewBox="0 0 24 24"
+                        className="w-3.5 h-3.5 stroke-muted fill-none stroke-[1.8] stroke-linecap-round stroke-linejoin-round"
+                      >
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                      </svg>
+                      {blog.comments}
+                    </span>
+                  </div>
 
-                  <div className="flex items-center gap-2 pt-2.5 border-t border-border">
-                    <div
-                      className={`w-6 h-6 rounded-full ${blog.avatarBg} flex items-center justify-center text-[0.65rem] font-medium text-white shrink-0`}
-                    >
-                      {blog.avatar}
+                  <div className="p-[12px_16px_16px]">
+                    <div className="text-[0.68rem] font-medium tracking-[0.08em] uppercase text-accent mb-1.5">
+                      {blog.category}
                     </div>
 
-                    <span className="text-[0.75rem] text-secondary font-light">
-                      {blog.author}
-                    </span>
+                    <h3 className="font-['Fraunces',serif] text-[0.95rem] font-normal text-primary leading-[1.45] mb-3 line-clamp-2 min-h-[2.9em]">
+                      {blog.title}
+                    </h3>
 
-                    <span className="text-[0.72rem] text-muted ml-auto">
-                      {blog.readTime}
-                    </span>
+                    <div className="flex items-center gap-2 pt-2.5 border-t border-border">
+                      <div
+                        className={`w-6 h-6 rounded-full ${blog.avatarBg} flex items-center justify-center text-[0.65rem] font-medium text-white shrink-0`}
+                      >
+                        {blog.avatar}
+                      </div>
+
+                      <span className="text-[0.75rem] text-secondary font-light">
+                        {blog.author}
+                      </span>
+
+                      <span className="text-[0.72rem] text-muted ml-auto">
+                        {blog.readTime}
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </Link>
+                </Link>
+              </div>
             ))}
           </div>
         </div>
