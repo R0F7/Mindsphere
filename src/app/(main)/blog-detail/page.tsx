@@ -1,8 +1,28 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function BlogDetail() {
+  const [activeSection, setActiveSection] = useState("s1");
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.6 }
+    );
+
+    const headings = document.querySelectorAll("h2");
+    headings.forEach((h) => observer.observe(h));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className="py-25 px-[5%] lg:px-0">
       <div className="container">
@@ -17,8 +37,8 @@ export default function BlogDetail() {
 
           <ArticleBody />
 
-          <div className="hidden lg:block">
-            <ArticleSidebar />
+          <div className="hidden lg:block sticky top-8">
+            <ArticleSidebar activeSection={activeSection} />
           </div>
         </div>
       </div>
@@ -212,19 +232,21 @@ function ArticleActionBar() {
 }
 
 function ArticleBody() {
+  const dropCapStyle =
+    "first-letter:font-fraunces first-letter:float-left first-letter:text-[4rem] first-letter:leading-[0.8] first-letter:font-light first-letter:text-[var(--navy)] dark:first-letter:text-[var(--accent)] first-letter:mr-2 first-letter:mt-1.5 first-letter:tracking-[-0.02em]";
+
   return (
     <article className="art-body min-w-0">
       {/* Prose Content Area */}
       <div
-        className="font-lora text-[1.05rem] text-[var(--t2)] leading-[1.85] font-normal 
-        [&>p]:mb-[1.4em] 
-        [&>p:first-of-type::first-letter]:font-fraunces [&>p:first-of-type::first-letter]:float-left [&>p:first-of-type::first-letter]:text-[4rem] [&>p:first-of-type::first-letter]:leading-[0.8] [&>p:first-of-type::first-letter]:font-light [&>p:first-of-type::first-letter]:text-[var(--navy)] dark:[&>p:first-of-type::first-letter]:text-[var(--accent)] [&>p:first-of-type::first-letter]:mr-2 [&>p:first-of-type::first-letter]:mt-1.5 [&>p:first-of-type::first-letter]:tracking-[-0.02em]
+        className="text-lg text-[var(--t2)] leading-[1.75] font-
+        [&>p]:mb-[1.4em]
         [&>h2]:font-fraunces [&>h2]:text-[1.5rem] [&>h2]:font-normal [&>h2]:text-[var(--text)] [&>h2]:tracking-[-0.02em] [&>h2]:mt-[2em] [&>h2]:mb-[0.75em] [&>h2]:leading-[1.25]
         [&>h3]:font-fraunces [&>h3]:text-[1.15rem] [&>h3]:font-normal [&>h3]:text-[var(--text)] [&>h3]:mt-[1.75em] [&>h3]:mb-[0.6em]
         [&>blockquote]:border-l-[3px] [&>blockquote]:border-[var(--accent)] [&>blockquote]:px-6 [&>blockquote]:py-4 [&>blockquote]:my-[2em] [&>blockquote]:bg-[var(--accent-l)] [&>blockquote]:rounded-r-[var(--rm)]
         [&>blockquote_p]:font-fraunces [&>blockquote_p]:italic [&>blockquote_p]:text-[var(--navy)] dark:[&>blockquote_p]:text-[var(--text)] [&>blockquote_p]:m-0 [&>blockquote_p]:leading-[1.65]"
       >
-        <p>
+        <p className={dropCapStyle}>
           Anxiety is something most teenagers experience — the racing heart
           before a test, the spiral of "what ifs" at 3am, the constant low-level
           hum of worry that follows you into every room. But despite how common
@@ -260,7 +282,7 @@ function ArticleBody() {
         </p>
 
         <blockquote className="reveal">
-          <p>
+          <p className={dropCapStyle}>
             "The bravest thing I ever did was tell my best friend I was anxious
             all the time. Not because she fixed it — she didn't. But because
             saying it out loud made it real, and real things can be dealt with."
@@ -296,11 +318,11 @@ function ArticleBody() {
       </div>
 
       <div
-        className="font-lora text-[1.05rem] text-[var(--t2)] leading-[1.85] 
+        className="font-lora text-lg text-[var(--t2)] leading-[1.85] 
         [&>p]:mb-[1.4em] 
         [&>h2]:font-fraunces [&>h2]:text-[1.5rem] [&>h2]:text-[var(--text)] [&>h2]:mt-[2em] [&>h2]:mb-[0.75em]"
       >
-        <p>
+        <p className={dropCapStyle}>
           The answers are layered: fear of being a burden, fear of being seen as
           weak, fear that verbalizing something will make it more real. There's
           also the very specific teenage fear of being misunderstood — of trying
@@ -381,14 +403,14 @@ function ArticleBody() {
   );
 }
 
-function ArticleSidebar() {
+function ArticleSidebar({ activeSection }: { activeSection: string }) {
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   return (
-    <aside className="sticky top-8 flex flex-col gap-4 w-[280px]">
+    <aside className="flex flex-col gap-4 w-[280px]">
       {/* Newsletter Widget */}
       <div className="bg-[var(--white)] border border-[var(--bd)] rounded-[var(--rl)] p-5 shadow-[var(--sh1)] transition-all">
         <div className="w-10 h-10 rounded-[var(--rm)] bg-[var(--accent-l)] flex items-center justify-center mb-3">
@@ -439,7 +461,7 @@ function ArticleSidebar() {
               onClick={() => scrollToSection(item.id)}
               className={`text-[0.8rem] font-light px-2.5 py-1.5 rounded-[var(--r)] cursor-pointer transition-all border-l-2 
                 ${
-                  index === 0
+                  activeSection === item.id
                     ? "text-[var(--accent)] bg-[var(--accent-l)] border-l-[var(--accent)]"
                     : "text-[var(--t2)] border-l-transparent hover:text-[var(--accent)] hover:bg-[var(--accent-l)] hover:border-l-[var(--accent)]"
                 }`}
@@ -619,16 +641,6 @@ function ReadNext() {
           <h3 className="font-fraunces text-[1.5rem] font-normal text-[var(--text)]">
             Read Next
           </h3>
-          <div className="flex gap-2">
-            {["←", "→"].map((arrow, i) => (
-              <button
-                key={i}
-                className="w-9 h-9 rounded-full border border-[var(--bd2)] bg-[var(--white)] flex items-center justify-center text-[0.8rem] text-[var(--t2)] cursor-pointer transition-all duration-200 shadow-[var(--sh1)] hover:bg-[var(--navy)] hover:text-white hover:border-[var(--navy)]"
-              >
-                {arrow}
-              </button>
-            ))}
-          </div>
         </div>
 
         {/* Grid */}
