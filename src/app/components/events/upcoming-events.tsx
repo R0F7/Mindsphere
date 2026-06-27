@@ -106,96 +106,99 @@ export default function UpcomingEvents() {
         {/* --- EVENT LIST --- */}
         <div className="flex flex-col gap-[15px]">
           {EVENTS.map((event, i) => (
-            <Link
-              href="/event-detail"
+            <div
               key={event.id}
-              className="group relative grid grid-cols-1 md:grid-cols-[80px_1fr_auto] items-center gap-[28px] p-[28px_32px] bg-off-white border border-border rounded-xl transition-all duration-300 cursor-pointer overflow-hidden hover:-translate-y-[3px] hover:shadow-md hover:bg-white hover:border-strong"
               data-aos="fade-up"
-              data-aos-delay={i * 100}
+              data-aos-delay={100 + i * 50}
             >
-              {/* Left Accent Line */}
-              <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-transparent transition-colors duration-200 group-hover:bg-accent rounded-[3px_0_0_3px]" />
+              <Link
+                href="/event-detail"
+                className="group relative grid grid-cols-1 md:grid-cols-[80px_1fr_auto] items-center gap-[28px] p-[28px_32px] bg-off-white border border-border rounded-xl transition-all duration-300 cursor-pointer overflow-hidden hover:-translate-y-[3px] hover:shadow-md hover:bg-white hover:border-strong"
+              >
+                {/* Left Accent Line */}
+                <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-transparent transition-colors duration-200 group-hover:bg-accent rounded-[3px_0_0_3px]" />
 
-              {/* Date Block */}
-              <div className="text-center flex-shrink-0">
-                <div className="text-[0.68rem] font-semibold tracking-[0.1em] uppercase text-accent leading-none mb-[2px]">
-                  {event.month}
-                </div>
-                <div className="font-fraunces text-[2.4rem] font-light text-primary tracking-[-0.04em] leading-none">
-                  {event.day}
-                </div>
-              </div>
-
-              {/* Event Body */}
-              <div className="min-w-0">
-                <div className="flex items-center gap-[8px] mb-[8px] flex-wrap">
-                  <span
-                    className={`text-[0.65rem] font-bold tracking-[0.08em] uppercase px-[11px] py-[4px] rounded-full ${getTypeStyles(event.type)}`}
-                  >
-                    {event.type}
-                  </span>
-                  <span className="flex items-center gap-[5px] text-[0.75rem] text-muted font-light">
-                    <svg
-                      className="w-[11px] h-[11px]"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                    >
-                      <circle cx="12" cy="12" r="10" />
-                      <polyline points="12 6 12 12 16 14" />
-                    </svg>
-                    {event.time}
-                  </span>
-                </div>
-                <h3 className="font-fraunces text-[1.15rem] font-normal text-primary mb-[10px] tracking-[-0.01em] leading-[1.3]">
-                  {event.title}
-                </h3>
-                <div className="flex items-center gap-[16px] flex-wrap">
-                  <div className="flex items-center gap-[5px] text-[0.77rem] text-muted font-light">
-                    <svg
-                      className="w-[12px] h-[12px] opacity-70"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                      <circle cx="12" cy="10" r="3" />
-                    </svg>
-                    {event.location}
+                {/* Date Block */}
+                <div className="text-center flex-shrink-0">
+                  <div className="text-[0.68rem] font-semibold tracking-[0.1em] uppercase text-accent leading-none mb-[2px]">
+                    {event.month}
                   </div>
-                  {/* Avatar Stack */}
-                  <div className="flex items-center gap-[6px]">
-                    <div className="flex">
-                      {event.avatars.map((av, idx) => (
-                        <div
-                          key={idx}
-                          className={`w-[22px] h-[22px] rounded-full border-[1.5px] border-off-white flex items-center justify-center text-[0.52rem] text-white font-semibold -ml-[7px] first:ml-0 ${av.bg}`}
-                        >
-                          {av.label}
-                        </div>
-                      ))}
-                    </div>
-                    <span className="text-[0.75rem] text-muted font-light">
-                      {event.going} going
+                  <div className="font-fraunces text-[2.4rem] font-light text-primary tracking-[-0.04em] leading-none">
+                    {event.day}
+                  </div>
+                </div>
+
+                {/* Event Body */}
+                <div className="min-w-0">
+                  <div className="flex items-center gap-[8px] mb-[8px] flex-wrap">
+                    <span
+                      className={`text-[0.65rem] font-bold tracking-[0.08em] uppercase px-[11px] py-[4px] rounded-full ${getTypeStyles(event.type)}`}
+                    >
+                      {event.type}
+                    </span>
+                    <span className="flex items-center gap-[5px] text-[0.75rem] text-muted font-light">
+                      <svg
+                        className="w-[11px] h-[11px]"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                      >
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                      </svg>
+                      {event.time}
                     </span>
                   </div>
+                  <h3 className="font-fraunces text-[1.15rem] font-normal text-primary mb-[10px] tracking-[-0.01em] leading-[1.3]">
+                    {event.title}
+                  </h3>
+                  <div className="flex items-center gap-[16px] flex-wrap">
+                    <div className="flex items-center gap-[5px] text-[0.77rem] text-muted font-light">
+                      <svg
+                        className="w-[12px] h-[12px] opacity-70"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                      </svg>
+                      {event.location}
+                    </div>
+                    {/* Avatar Stack */}
+                    <div className="flex items-center gap-[6px]">
+                      <div className="flex">
+                        {event.avatars.map((av, idx) => (
+                          <div
+                            key={idx}
+                            className={`w-[22px] h-[22px] rounded-full border-[1.5px] border-off-white flex items-center justify-center text-[0.52rem] text-white font-semibold -ml-[7px] first:ml-0 ${av.bg}`}
+                          >
+                            {av.label}
+                          </div>
+                        ))}
+                      </div>
+                      <span className="text-[0.75rem] text-muted font-light">
+                        {event.going} going
+                      </span>
+                    </div>
+                  </div>
                 </div>
-              </div>
 
-              {/* CTA Button */}
-              <div className="flex-shrink-0">
-                <button
-                  className={`px-[22px] py-[10px] rounded-full font-dm-sans text-[0.82rem] font-medium transition-all duration-200 whitespace-nowrap inline-flex items-center gap-[6px] border-none ${getBtnStyles(event.btnClass)}`}
-                >
-                  {event.cta}
-                </button>
-              </div>
-            </Link>
+                {/* CTA Button */}
+                <div className="flex-shrink-0">
+                  <button
+                    className={`px-[22px] py-[10px] rounded-full font-dm-sans text-[0.82rem] font-medium transition-all duration-200 whitespace-nowrap inline-flex items-center gap-[6px] border-none ${getBtnStyles(event.btnClass)}`}
+                  >
+                    {event.cta}
+                  </button>
+                </div>
+              </Link>
+            </div>
           ))}
         </div>
       </div>
