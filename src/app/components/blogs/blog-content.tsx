@@ -248,7 +248,10 @@ export default function BlogContent() {
 
   const handlePageChange = (p: number) => {
     setCurrentPage(p);
-    feedRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    setTimeout(() => {
+      feedRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 50);
   };
 
   // --- Pagination Dots Logic ---
@@ -310,26 +313,31 @@ export default function BlogContent() {
             )}
           </div>
 
-          {/* ─── PAGINATION (Active) ─── */}
+          {/* ─── PAGINATION ─── */}
           {totalPages > 1 && (
-            <div className="flex items-center justify-center gap-2">
+            <div className="flex items-center justify-center gap-2 mt-12 mb-6">
+              {/* Left Arrow Button */}
               <button
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1}
-                className="w-10 h-10 rounded-lg border border-[var(--bd2)] disabled:opacity-30"
+                className="w-10 h-10 flex items-center justify-center rounded-lg border border-[var(--bd2)] text-t2 transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-t2 disabled:hover:border-[var(--bd2)] cursor-pointer hover:bg-[var(--soft)] hover:text-[var(--navy)] hover:border-[var(--navy)]"
               >
                 ←
               </button>
               {getPages().map((p, i) =>
                 p === "..." ? (
-                  <span key={i} className="px-2">
+                  <span key={i} className="px-2 text-[var(--t3)] select-none">
                     ...
                   </span>
                 ) : (
                   <button
                     key={i}
                     onClick={() => handlePageChange(p as number)}
-                    className={`w-10 h-10 rounded-lg border text-sm font-medium ${currentPage === p ? "bg-[var(--navy)] text-white" : "border-[var(--bd2)] hover:bg-[var(--soft)]"}`}
+                    className={`w-10 h-10 rounded-lg border text-sm font-medium transition-all duration-200 cursor-pointer ${
+                      currentPage === p
+                        ? "bg-[var(--navy)] text-white border-[var(--navy)]"
+                        : "border-[var(--bd2)] text-t2 hover:bg-[var(--soft)] hover:border-[var(--bd2)]"
+                    }`}
                   >
                     {p}
                   </button>
@@ -338,7 +346,7 @@ export default function BlogContent() {
               <button
                 onClick={() => handlePageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
-                className="w-10 h-10 rounded-lg border border-[var(--bd2)] disabled:opacity-30"
+                className="w-10 h-10 flex items-center justify-center rounded-lg border border-[var(--bd2)] text-t2 transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-t2 disabled:hover:border-[var(--bd2)] cursor-pointer hover:bg-[var(--soft)] hover:text-[var(--navy)] hover:border-[var(--navy)]"
               >
                 →
               </button>
@@ -346,7 +354,7 @@ export default function BlogContent() {
           )}
         </main>
 
-        {/* ─── RIGHT: SIDEBAR (All 4 Parts) ─── */}
+        {/* ─── RIGHT: SIDEBAR ─── */}
         <aside className="hidden lg:block sticky top-8 space-y-6">
           {/* 1. Trending Now */}
           <div className="bg-white border border-[var(--bd)] rounded-[var(--rl)] p-6 shadow-[var(--sh1)]">
@@ -373,7 +381,7 @@ export default function BlogContent() {
           </div>
 
           {/* 2. Popular Topics */}
-          <div className="bg-white border border-[var(--bd)] rounded-[var(--rl)] p-6 shadow-[var(--sh1)]">
+          <div className="bg-white border border-bd rounded-(--rl) p-6 shadow-sh1">
             <div className="text-[0.85rem] font-bold mb-4 uppercase tracking-wider">
               Popular Topics
             </div>
@@ -382,7 +390,7 @@ export default function BlogContent() {
                 <button
                   key={slug}
                   onClick={() => setCurrentFilter(slug)}
-                  className={`text-xs px-4 py-2 rounded-full border transition-all ${currentFilter === slug ? "bg-[var(--navy)] text-white border-[var(--navy)]" : "border-[var(--bd2)] text-[var(--t2)] hover:bg-[var(--soft)]"}`}
+                  className={`text-xs px-4 py-2 rounded-full border transition-all ${currentFilter === slug ? "bg-navy text-white border-navy" : "border-bd2 text-t2 hover:bg-soft cursor-pointer"}`}
                 >
                   {TOPIC_LABELS[slug]}
                 </button>
@@ -406,7 +414,7 @@ export default function BlogContent() {
             </div>
             <button
               onClick={() => setSubmitOpen(true)}
-              className="w-full py-3 bg-[var(--navy)] text-white rounded-xl text-sm font-medium hover:translate-y-[-2px] transition-all"
+              className="w-full font-sans text-[0.9rem] font-medium inline-block items-center gap-2 rounded-full bg-navy px-7 py-2.5 text-white transition-all duration-250 hover:-translate-y-0.5 hover:opacity-90 hover:shadow-[0_8px_28px_rgba(13,31,60,0.22)] cursor-pointer"
             >
               Submit Article
             </button>
@@ -422,7 +430,7 @@ export default function BlogContent() {
             </p>
             <button
               onClick={() => setNewsletterOpen(true)}
-              className="w-full py-3 bg-[var(--navy)] text-white rounded-xl text-sm font-medium flex items-center justify-center gap-2"
+              className="w-full font-sans text-[0.9rem] font-medium inline-flex items-center justify-center gap-2 rounded-full bg-navy px-7 py-2.5 text-white transition-all duration-250 hover:-translate-y-0.5 hover:opacity-90 hover:shadow-[0_8px_28px_rgba(13,31,60,0.22)] cursor-pointer"
             >
               <svg
                 className="w-4 h-4 stroke-white fill-none"
@@ -446,7 +454,6 @@ export default function BlogContent() {
   );
 }
 
-// --- SUB-COMPONENTS ---
 function ArticleCard({ article, index }: { article: Article; index: number }) {
   return (
     <Link
@@ -515,7 +522,7 @@ function TrendItem({
         {emoji}
       </div>
       <div className="min-w-0">
-        <div className="text-xs font-semibold text-[var(--text)] leading-snug line-clamp-2 group-hover:text-[var(--accent)] transition-colors">
+        <div className="text-xs font-medium text-text leading-snug line-clamp-2 group-hover:text-[var(--accent)] transition-colors">
           {title}
         </div>
         <div className="text-[10px] text-[var(--t3)] mt-1">{views} views</div>
@@ -554,8 +561,9 @@ function NewsletterModal({
       >
         {/* Close Button */}
         <button
+          type="button"
+          className="modal-close absolute top-4 right-4 w-8 h-8 rounded-full border border-border flex items-center justify-center color-[var(--text-muted)] text-[1.1rem] transition-all duration-200 bg-transparent cursor-pointer hover:bg-soft-grey"
           onClick={handleClose}
-          className="absolute top-[18px] right-[18px] text-[var(--t3)] hover:text-[var(--text)] text-xl transition-colors"
         >
           ×
         </button>
@@ -588,7 +596,7 @@ function NewsletterModal({
               />
               <button
                 onClick={() => setIsSubscribed(true)}
-                className="w-full py-3.5 bg-[var(--navy)] text-white rounded-[var(--rm)] text-[0.9rem] font-medium mt-2 shadow-[0_4px_16px_rgba(13,31,60,0.18)] hover:opacity-[0.88] hover:-translate-y-[1px] transition-all"
+                className="font-sans text-[0.9rem] font-medium inline-block items-center gap-2 rounded-full bg-navy px-7 py-3.25 text-white transition-all duration-250 hover:-translate-y-0.5 hover:opacity-90 hover:shadow-[0_8px_28px_rgba(13,31,60,0.22)] cursor-pointer"
               >
                 Subscribe Now →
               </button>
@@ -608,7 +616,7 @@ function NewsletterModal({
             </div>
             <button
               onClick={handleClose}
-              className="mt-8 text-[0.82rem] font-medium text-[var(--accent)] hover:underline"
+              className="font-sans text-[0.9rem] font-medium inline-block items-center gap-2 rounded-full bg-navy px-7 py-2.5 text-white transition-all duration-250 hover:-translate-y-0.5 hover:opacity-90 hover:shadow-[0_8px_28px_rgba(13,31,60,0.22)] cursor-pointer mt-8"
             >
               Close
             </button>
@@ -641,8 +649,9 @@ function SubmitModal({
       >
         {/* Close Button */}
         <button
+          type="button"
+          className="modal-close absolute top-4 right-4 w-8 h-8 rounded-full border border-border flex items-center justify-center color-[var(--text-muted)] text-[1.1rem] transition-all duration-200 bg-transparent cursor-pointer hover:bg-soft-grey"
           onClick={onClose}
-          className="absolute top-[14px] right-[14px] text-2xl text-[var(--t3)] hover:text-[var(--text)] transition-colors"
         >
           ×
         </button>
@@ -721,20 +730,24 @@ function SubmitModal({
 
           <div className="flex flex-col gap-1.5">
             <label className="text-[0.78rem] font-medium text-[var(--text)]">
-              Article Content *
+              Article Content (Google Drive Link) *
             </label>
-            <textarea
-              placeholder="Write your article here, or paste it in. Minimum 300 words."
-              className="w-full px-[15px] py-3 border border-[var(--bd2)] rounded-[var(--rm)] text-[0.88rem] bg-[var(--white)] outline-none focus:border-[var(--accent)] transition-all min-h-[100px] resize-y leading-[1.6] placeholder:text-[var(--t3)]"
+            <input
+              type="url"
+              placeholder="Paste your Google Drive document link here..."
+              className="w-full px-[15px] py-3 border border-[var(--bd2)] rounded-[var(--rm)] text-[0.88rem] bg-[var(--white)] text-[var(--text)] outline-none focus:border-[var(--accent)] focus:shadow-[0_0_0_3px_rgba(59,130,196,0.08)] transition-all placeholder:text-[var(--t3)]"
+              autoComplete="off"
             />
-            <span className="text-[0.72rem] text-[var(--t3)] font-light">
-              Minimum 300 words. We review all submissions within 3–5 days.
+            <span className="text-[0.74rem] text-[var(--t2)] font-light leading-[1.4] px-0.5">
+              Please make sure the link sharing permission is set to{" "}
+              <span className="font-medium text-[var(--text)]">Editable</span>.
+              Minimum 300 words.
             </span>
           </div>
 
           <button
             type="submit"
-            className="w-full p-[13px] bg-[var(--navy)] text-white rounded-[var(--rm)] text-[0.9rem] font-medium mt-1 shadow-[0_4px_16px_rgba(13,31,60,0.18)] hover:opacity-[0.88] hover:-translate-y-[1px] transition-all"
+            className="w-full p-[13px] bg-[var(--navy)] text-white rounded-[var(--rm)] text-[0.9rem] font-medium mt-2 shadow-[0_4px_16px_rgba(13,31,60,0.18)] hover:opacity-[0.88] hover:-translate-y-[1px] transition-all cursor-pointer"
           >
             Submit for Review →
           </button>
