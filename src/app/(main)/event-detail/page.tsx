@@ -68,8 +68,8 @@ export default function EventDetails() {
       </section>
 
       {/* ─── MAIN LAYOUT ─── */}
-      <main className="px-[5%] pb-[80px] pt-[28px]">
-        <div className="container grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-[28px] items-start">
+      <main className="px-[5%] pb-14 md:pb-[80px] pt-[28px]">
+        <div className="container grid grid-cols-1 lg:grid-cols-[1fr_340px] pb-14 md:pb-[80px] gap-[28px] items-start">
           {/* LEFT: MAIN CONTENT */}
           <div
             data-aos="fade-up"
@@ -177,7 +177,7 @@ export default function EventDetails() {
                 icon="👥"
                 label="Spots"
                 value={
-                  <div>
+                  <div className="flex items-center gap-1.5">
                     18 left <br />
                     <span className="inline-flex items-center gap-1 text-[0.72rem] font-medium text-amber-700 bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/20">
                       ⚠ Filling up fast
@@ -227,7 +227,7 @@ export default function EventDetails() {
                 </div>
               </div>
 
-              <button className="w-full py-[14px] bg-[var(--navy)] dark:bg-[var(--accent)] text-white rounded-[var(--rm)] font-medium flex items-center justify-center gap-2 transition-all hover:opacity-90 hover:-translate-y-0.5 shadow-lg group">
+              <button className="w-full py-[14px] bg-[var(--navy)] dark:bg-[var(--accent)] text-white rounded-[var(--rm)] font-medium flex items-center justify-center gap-2 transition-all hover:opacity-90 hover:-translate-y-0.5 shadow-lg group cursor-pointer">
                 Register Now
                 <svg
                   className="w-4 h-4 transition-transform group-hover:translate-x-1"
@@ -243,10 +243,48 @@ export default function EventDetails() {
                 🔒 Safe & free registration
               </div>
             </div>
+
+            {/* Support card */}
+            <div
+              data-aos="fade-up"
+              data-aos-delay="100"
+              className="bg-white border border-bd rounded-[var(--rx)] shadow-sh1 p-[24px]"
+            >
+              <div className="">
+                {/* Header */}
+                <div className="support-header flex items-center gap-[10px] mb-[10px]">
+                  <div className="support-icon-wrap w-[36px] h-[36px] rounded-full bg-[var(--accent-l)] flex items-center justify-center text-[0.9rem]">
+                    💬
+                  </div>
+                  <div className="support-card-label text-[0.65rem] font-semibold tracking-[0.1em] uppercase text-[var(--accent)]">
+                    Support
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="support-card-title font-fraunces text-lg font-normal text-[var(--text)] mb-[4px]">
+                  Need assistance?
+                </div>
+                <div className="support-card-sub text-[0.78rem] text-[var(--t2)] font-light leading-[1.55] mb-[16px]">
+                  Have questions about the event or registration? Our team is
+                  here to help guide you.
+                </div>
+
+                {/* Buttons */}
+                <div className="support-btns flex gap-[8px]">
+                  <button className="support-btn flex-1 px-[12px] py-[9px] border border-[var(--bd2)] rounded-sm text-[0.90rem] font-medium text-[var(--text)] bg-[var(--white)] flex items-center justify-center gap-[6px] transition-all duration-200 hover:bg-[var(--navy)] hover:text-white hover:border-[var(--navy)] cursor-pointer">
+                    ✉ Email
+                  </button>
+                  <button className="support-btn flex-1 px-[12px] py-[9px] border border-[var(--bd2)] rounded-sm text-[0.90rem] font-medium text-[var(--text)] bg-[var(--white)] flex items-center justify-center gap-[6px] transition-all duration-200 hover:bg-[var(--navy)] hover:text-white hover:border-[var(--navy)] cursor-pointer">
+                    💬 Chat
+                  </button>
+                </div>
+              </div>
+            </div>
           </aside>
         </div>
 
-        <PastEvents/>
+        <PastEvents />
       </main>
     </div>
   );
@@ -263,7 +301,9 @@ const MetaItem = ({ icon, label, value }: any) => (
       <div className="text-[0.68rem] font-medium uppercase tracking-wider text-[var(--t3)]">
         {label}
       </div>
-      <div className="text-[0.85rem] font-semibold text-[var(--text)]">{value}</div>
+      <div className="text-[0.85rem] font-semibold text-[var(--text)]">
+        {value}
+      </div>
     </div>
   </div>
 );
@@ -360,15 +400,15 @@ const PastEvents = () => {
           <h2 className="font-fraunces text-[1.6rem] font-light text-[var(--text)] tracking-[-0.02em]">
             Past Events
           </h2>
-          {/* Optional: Navigation buttons if needed in future */}
-          <div className="flex gap-[8px]">
+          {/* Navigation buttons if needed in future */}
+          {/* <div className="flex gap-[8px]">
             <button className="w-[38px] h-[38px] rounded-full border border-[var(--bd2)] bg-[var(--white)] flex items-center justify-center text-t2 transition-all hover:bg-[var(--navy)] hover:text-white hover:border-[var(--navy)] shadow-[var(--sh1)] cursor-pointer">
               ←
             </button>
             <button className="w-[38px] h-[38px] rounded-full border border-[var(--bd2)] bg-[var(--white)] flex items-center justify-center text-t2 transition-all hover:bg-[var(--navy)] hover:text-white hover:border-[var(--navy)] shadow-[var(--sh1)] cursor-pointer">
               →
             </button>
-          </div>
+          </div> */}
         </div>
 
         {/* Grid */}
@@ -377,39 +417,40 @@ const PastEvents = () => {
             <div
               key={event.id}
               data-aos="fade-up"
-              data-aos-delay={index * 100}
-              className="group bg-[var(--white)] border border-bd rounded-[var(--rl)] overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-[5px] hover:shadow-sh3"
+              data-aos-delay={100 + index * 50}
             >
-              {/* Image Area */}
-              <div className="aspect-[4/3] overflow-hidden relative">
-                <div
-                  className="w-full h-full flex items-center justify-center text-[3rem] transition-transform duration-500 group-hover:scale-[1.06] relative"
-                  style={{ background: event.gradient }}
-                >
-                  {event.emoji}
-                </div>
-                {/* Overlay Texture */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[rgba(13,31,60,0.35)] to-transparent" />
+              <div className="group bg-[var(--white)] border border-bd rounded-[var(--rl)] overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-[5px] hover:shadow-sh3">
+                {/* Image Area */}
+                <div className="aspect-[4/3] overflow-hidden relative">
+                  <div
+                    className="w-full h-full flex items-center justify-center text-[3rem] transition-transform duration-500 group-hover:scale-[1.06] relative"
+                    style={{ background: event.gradient }}
+                  >
+                    {event.emoji}
+                  </div>
+                  {/* Overlay Texture */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[rgba(13,31,60,0.35)] to-transparent" />
 
-                {/* Badge */}
-                <div className="absolute top-[12px] left-[12px] z-[1] text-[0.63rem] font-semibold tracking-wider uppercase px-[10px] py-[4px] rounded-full bg-[#0d1f3c]/70 text-white backdrop-blur-md border border-white/15">
-                  {event.category}
+                  {/* Badge */}
+                  <div className="absolute top-[12px] left-[12px] z-[1] text-[0.63rem] font-semibold tracking-wider uppercase px-[10px] py-[4px] rounded-full bg-[#0d1f3c]/70 text-white backdrop-blur-md border border-white/15">
+                    {event.category}
+                  </div>
                 </div>
-              </div>
 
-              {/* Body */}
-              <div className="p-[18px]">
-                <div className="flex items-center gap-[6px] text-[0.72rem] text-t3 font-light mb-[8px]">
-                  <span>{event.date}</span>
-                  <span className="w-[3px] h-[3px] rounded-full bg-[var(--t3)]" />
-                  <span>{event.duration}</span>
+                {/* Body */}
+                <div className="p-[18px]">
+                  <div className="flex items-center gap-[6px] text-[0.72rem] text-t3 font-light mb-[8px]">
+                    <span>{event.date}</span>
+                    <span className="w-[3px] h-[3px] rounded-full bg-[var(--t3)]" />
+                    <span>{event.duration}</span>
+                  </div>
+                  <h3 className="font-fraunces text-[0.95rem] font-normal text-text leading-[1.35] mb-[6px] tracking-tight">
+                    {event.title}
+                  </h3>
+                  <p className="text-[0.78rem] text-t3 leading-[1.55] font-light line-clamp-2">
+                    {event.desc}
+                  </p>
                 </div>
-                <h3 className="font-fraunces text-[0.95rem] font-normal text-text leading-[1.35] mb-[6px] tracking-tight">
-                  {event.title}
-                </h3>
-                <p className="text-[0.78rem] text-t3 leading-[1.55] font-light line-clamp-2">
-                  {event.desc}
-                </p>
               </div>
             </div>
           ))}
