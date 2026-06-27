@@ -1,6 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
+import { FaDiscord, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { FiFacebook } from "react-icons/fi";
 
 export default function ContactSection() {
   const [submitted, setSubmitted] = useState(false);
@@ -21,7 +24,7 @@ export default function ContactSection() {
 
       <div className="mx-auto container">
         {/* Header */}
-        <div  data-aos="fade-up" className="mb-14">
+        <div data-aos="fade-up" className="mb-14">
           <div className="mb-3 text-[0.72rem] font-medium uppercase tracking-[0.14em] text-accent">
             Contact Us
           </div>
@@ -38,7 +41,10 @@ export default function ContactSection() {
 
         {/* Grid */}
         <div className="grid items-start gap-14 lg:grid-cols-[1.6fr_1fr]">
-          <div  data-aos="fade-right" className="rounded-xl border border-border bg-white p-10 shadow-sm">
+          <div
+            data-aos="fade-right"
+            className="rounded-xl border border-border bg-white p-10 shadow-sm"
+          >
             {!submitted ? (
               <form onSubmit={handleSubmit}>
                 <div id="contact-form-content">
@@ -153,7 +159,7 @@ export default function ContactSection() {
           </div>
 
           {/* Right Side */}
-          <div  data-aos="fade-left" className="flex flex-col gap-5 pt-2">
+          <div data-aos="fade-left" className="flex flex-col gap-5 pt-2">
             {/* Intro */}
             <div>
               <div className="mb-3 text-[0.72rem] font-medium uppercase tracking-[0.14em] text-accent">
@@ -175,15 +181,15 @@ export default function ContactSection() {
 
               <div className="flex flex-col gap-2.5">
                 {/* Instagram */}
-                <a
+                <Link
                   href="#"
                   className="group flex items-center gap-3.5 rounded-md border border-border bg-white px-4 py-3 shadow-sm transition-all duration-200 hover:translate-x-1 hover:border-strong hover:shadow-md"
                 >
                   <div
-                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm bg-[linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)] text-[0.85rem] font-semibold"
+                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm bg-[linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)] text-base font-semibold"
                     style={{ color: "white" }}
                   >
-                    ig
+                    <FaInstagram />
                   </div>
 
                   <div>
@@ -199,15 +205,18 @@ export default function ContactSection() {
                   <span className="ml-auto text-[0.8rem] text-muted transition-transform duration-200 group-hover:translate-x-0.75">
                     →
                   </span>
-                </a>
+                </Link>
 
                 {/* Facebook */}
-                <a
+                <Link
                   href="#"
                   className="group flex items-center gap-3.5 rounded-md border border-border bg-white px-4 py-3 shadow-sm transition-all duration-200 hover:translate-x-1 hover:border-strong hover:shadow-md"
                 >
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm bg-[#1877F2] text-[0.85rem] font-semibold text-white">
-                    f
+                  <div
+                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm bg-[#1877F2] text-base font-semibold"
+                    style={{ color: "white" }}
+                  >
+                    <FiFacebook />
                   </div>
 
                   <div>
@@ -223,15 +232,18 @@ export default function ContactSection() {
                   <span className="ml-auto text-[0.8rem] text-muted transition-transform duration-200 group-hover:translate-x-0.75">
                     →
                   </span>
-                </a>
+                </Link>
 
                 {/* Linkedin */}
-                <a
+                <Link
                   href="#"
                   className="group flex items-center gap-3.5 rounded-md border border-border bg-white px-4 py-3 shadow-sm transition-all duration-200 hover:translate-x-1 hover:border-strong hover:shadow-md"
                 >
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm bg-[#0A66C2] text-[0.85rem] font-semibold text-white">
-                    in
+                  <div
+                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm bg-[#0A66C2] text-base font-semibold"
+                    style={{ color: "white" }}
+                  >
+                    <FaLinkedin />
                   </div>
 
                   <div>
@@ -247,15 +259,18 @@ export default function ContactSection() {
                   <span className="ml-auto text-[0.8rem] text-muted transition-transform duration-200 group-hover:translate-x-0.75">
                     →
                   </span>
-                </a>
+                </Link>
 
                 {/* Discord */}
-                <a
+                <Link
                   href="#"
                   className="group flex items-center gap-3.5 rounded-md border border-border bg-white px-4 py-3 shadow-sm transition-all duration-200 hover:translate-x-1 hover:border-strong hover:shadow-md"
                 >
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm bg-[#5865F2] text-[0.85rem] font-semibold text-white">
-                    dc
+                  <div
+                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm bg-[#5865F2] text-base font-semibold"
+                    style={{ color: "white" }}
+                  >
+                    <FaDiscord />
                   </div>
 
                   <div>
@@ -271,7 +286,7 @@ export default function ContactSection() {
                   <span className="ml-auto text-[0.8rem] text-muted transition-transform duration-200 group-hover:translate-x-0.75">
                     →
                   </span>
-                </a>
+                </Link>
               </div>
             </div>
 

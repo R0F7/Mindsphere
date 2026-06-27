@@ -29,8 +29,9 @@ export default function JoinSection() {
           Your Voice
           <br />
           Belongs{" "}
-          <em className="italic text-[var(--accent)] not-italic">Here</em>
+          <em className="italic text-[var(--accent)]">Here</em>
         </h2>
+
 
         {/* Body Text */}
         <p

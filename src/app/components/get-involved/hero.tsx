@@ -29,12 +29,12 @@ export default function Hero() {
 
         {/* Headline */}
         <h1
-          className="font-fraunces text-[clamp(2.4rem,6vw,4.5rem)] font-light tracking-[-0.04em] leading-[1.05] text-[var(--text-primary)] mb-5"
+          className="font-fraunces font-light text-[clamp(2.4rem,6vw,4.5rem)] tracking-[-0.04em] leading-[1.05] text-text mb-5"
           data-aos="fade-up"
-          data-aos-delay="100"
+          data-aos-delay="200"
         >
           Be Part of{" "}
-          <em className="italic text-[var(--accent)] not-italic">Something</em>
+          <em className="italic text-accent">Something</em>
           <br />
           That Matters
         </h1>
@@ -57,7 +57,7 @@ export default function Hero() {
             { label: "Contact Us", href: "#contact" },
             { label: "Verify Certificate", href: "#verify" },
             { label: "Newsletter", href: "#newsletter" },
-          ].map((anchor,idx) => (
+          ].map((anchor, idx) => (
             <a
               key={anchor.label}
               href={anchor.href}
