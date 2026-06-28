@@ -385,7 +385,7 @@ export default function ResourceLibrary() {
             <button
               disabled={currentPage === 1}
               onClick={() => setCurrentPage((p) => p - 1)}
-              className="w-9 h-9 rounded-(--rm) border border-bd2 flex items-center justify-center text-[0.82rem] disabled:opacity-30 transition-all hover:bg-soft"
+              className="w-9 h-9 rounded-(--rm) border border-bd2 flex items-center justify-center text-[0.82rem] disabled:opacity-30 transition-all hover:bg-soft cursor-pointer disabled:cursor-not-allowed"
             >
               ←
             </button>
@@ -393,7 +393,7 @@ export default function ResourceLibrary() {
               <button
                 key={i}
                 onClick={() => setCurrentPage(i + 1)}
-                className={`w-9 h-9 rounded-(--rm) text-[0.82rem] transition-all border ${
+                className={`w-9 h-9 rounded-(--rm) text-[0.82rem] transition-all border cursor-pointer ${
                   currentPage === i + 1
                     ? "bg-navy text-white border-navy font-medium"
                     : "bg-white border-bd2 text-t2 hover:bg-soft hover:text-text"
@@ -405,7 +405,7 @@ export default function ResourceLibrary() {
             <button
               disabled={currentPage === totalPages}
               onClick={() => setCurrentPage((p) => p + 1)}
-              className="w-9 h-9 rounded-(--rm) border border-bd2 flex items-center justify-center text-[0.82rem] disabled:opacity-30 transition-all hover:bg-soft"
+              className="w-9 h-9 rounded-(--rm) border border-bd2 flex items-center justify-center text-[0.82rem] disabled:opacity-30 transition-all hover:bg-soft cursor-pointer disabled:cursor-not-allowed"
             >
               →
             </button>
