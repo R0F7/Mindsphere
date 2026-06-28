@@ -152,17 +152,18 @@ export default function CertificateVerify() {
       <div ref={resultRef} className="max-w-3xl mx-auto mt-12 relative z-10">
         {/* Not Found State */}
         {notFound && (
-          <div className="bg-red-50/50 border border-red-100 p-10 rounded-[24px] text-center animate-in fade-in slide-in-from-top-4 duration-500">
+          <div className="bg-[#F6F2F5] dark:bg-[#171A28] border border-red-200 p-10 rounded-[24px] text-center animate-in fade-in slide-in-from-top-4 duration-500">
             <div className="text-3xl mb-4">🔎</div>
-            <h3 className="text-lg font-serif text-red-900 mb-2">
+            <h3 className="text-lg font-serif text-navy mb-2">
               Certificate not found
             </h3>
-            <p className="text-sm text-red-700/70 font-light mb-4">
-              No record matches the provided Name & ID. Please double-check for
-              typos.
+            <p className="text-sm text-navy/60 font-light mb-4">
+              No certificate matches the name and ID you entered.<br/> Please
+              double-check both fields — they must match exactly as printed on
+              the document.
             </p>
-            <div className="inline-block px-4 py-1.5 bg-red-100 text-red-700 rounded-full text-xs font-mono">
-              {name} • {certId}
+            <div className="inline-block px-4 py-1.5 bg-red-100 text-red-700 border border-red-200 rounded-full text-xs font-mono">
+              "{name}" • "{certId}"
             </div>
           </div>
         )}
@@ -211,7 +212,8 @@ export default function CertificateVerify() {
                   ? "expired before:bg-gradient-to-r before:from-[#EF4444] before:to-[#B91C1C]"
                   : "before:bg-gradient-to-r before:from-[#3B82C4] before:to-[#0D1F3C]"
               }`}
-            ><div className="absolute top-0 left-0 right-0 h-1 rounded-t-(--rx) bg-gradient-to-r from-accent to-navy-mid" />
+            >
+              <div className="absolute top-0 left-0 right-0 h-1 rounded-t-(--rx) bg-gradient-to-r from-accent to-navy-mid" />
               {/* Card Header */}
               <div className="cert-result-header flex items-start gap-4 mb-6">
                 {/* Seal */}
@@ -243,22 +245,22 @@ export default function CertificateVerify() {
                 </div>
 
                 {/* Status Pill Badge */}
-               <div
-                className={`hidden md:flex ml-auto shrink-0 items-center gap-2 px-3 py-1 border rounded-full text-[0.65rem] uppercase font-bold tracking-widest ${
-                  result.status === "valid"
-                    ? "bg-emerald-500/10 border-emerald-500 text-emerald-600"
-                    : "bg-amber-500/10 border-amber-500 text-amber-600"
-                }`}
-              >
-                <span
-                  className={`w-1.5 h-1.5 rounded-full ${result.status === "valid" ? "bg-emerald-500 animate-pulse" : "bg-amber-500"}`}
-                />
-                {result.status}
-              </div>
+                <div
+                  className={`hidden md:flex ml-auto shrink-0 items-center gap-2 px-3 py-1 border rounded-full text-[0.65rem] uppercase font-bold tracking-widest ${
+                    result.status === "valid"
+                      ? "bg-emerald-500/10 border-emerald-500 text-emerald-600"
+                      : "bg-amber-500/10 border-amber-500 text-amber-600"
+                  }`}
+                >
+                  <span
+                    className={`w-1.5 h-1.5 rounded-full ${result.status === "valid" ? "bg-emerald-500 animate-pulse" : "bg-amber-500"}`}
+                  />
+                  {result.status}
+                </div>
               </div>
 
               {/* Details Grid */}
-              <div className="cert-details  grid grid-cols-1 md:grid-cols-2 gap-3"> 
+              <div className="cert-details  grid grid-cols-1 md:grid-cols-2 gap-3">
                 {/* Type */}
                 <div className="cert-detail bg-white dark:bg-[#162a4d] border border-gray-200 dark:border-white/10 rounded-lg p-3.5 px-4 text-left">
                   <div className="cert-detail-label text-[0.68rem] font-medium tracking-widest uppercase text-gray-400 mb-1">
@@ -500,7 +502,6 @@ export default function CertificateVerify() {
             </div>
           </div>
         )}
-        
       </div>
     </main>
   );
