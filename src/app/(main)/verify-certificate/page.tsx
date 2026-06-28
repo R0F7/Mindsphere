@@ -89,13 +89,13 @@ export default function CertificateVerify() {
         <div className="w-16 h-16 bg-[#EBF3FB] dark:bg-[#1A3560] border border-[#3b82c433] rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6 shadow-sm">
           🎓
         </div>
-
-        <h1 className="text-4xl md:text-5xl font-serif font-light text-navy mb-4">
-          Verify a{" "}
-          <em className="italic text-[#3B82C4] not-italic">Certificate</em>
+        <h1 className="font-fraunces text-4xl md:text-5xl font-light text-navy leading-tight tracking-[-0.025em] mb-1.5">
+          Verify a <em className="italic text-[#3B82C4]">Certificate</em>
         </h1>
+
         <p className="text-gray-500 dark:text-gray-400 font-light text-sm md:text-base max-w-md mx-auto mb-10 leading-relaxed">
-          Enter details exactly as they appear on the official document.
+          Enter the certificate holder's full name and certificate ID exactly as
+          they appear on the document. Both fields must match our records.
         </p>
 
         {/* Form Card */}
@@ -142,6 +142,10 @@ export default function CertificateVerify() {
             )}
           </button>
         </div>
+        <p className="text-xs text-navy/70">
+          Certificate IDs are printed on the official document issued by
+          Mindsphere. Both name and ID are required.
+        </p>
       </div>
 
       {/* Results Section */}
@@ -167,117 +171,336 @@ export default function CertificateVerify() {
         {result && (
           <div className="space-y-6 animate-in fade-in slide-in-from-bottom-6 duration-700">
             {/* Status Banner */}
-            <div className="bg-emerald-50 border border-emerald-100 p-5 rounded-2xl flex items-center gap-4">
-              <div className="text-2xl">✅</div>
+            <div
+              className={`border p-5 rounded-2xl flex items-center gap-4 ${
+                result.status === "valid"
+                  ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-800 dark:text-emerald-300"
+                  : "bg-amber-500/10 border-amber-500/20 text-amber-800 dark:text-amber-300"
+              }`}
+            >
+              <div className="text-2xl">
+                {result.status === "valid" ? "✅" : "⚠️"}
+              </div>
               <div className="flex-1 text-left">
-                <h4 className="text-emerald-900 font-medium text-sm md:text-base">
+                <h4 className="font-medium text-sm md:text-base">
                   Verification Successful
                 </h4>
-                <p className="text-emerald-700/70 text-xs font-light">
-                  This certificate is authentic and currently recorded as valid.
+                <p className="opacity-90 text-sm font-light">
+                  This certificate is authentic and recorded as{" "}
+                  <span className="font-semibold">{result.status}</span>.
                 </p>
               </div>
-              <div className="hidden md:flex items-center gap-2 px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-[0.65rem] uppercase font-bold tracking-widest">
-                <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
-                Valid
+              <div
+                className={`hidden md:flex items-center gap-2 px-3 py-1 border rounded-full text-[0.65rem] uppercase font-bold tracking-widest ${
+                  result.status === "valid"
+                    ? "bg-emerald-500/10 border-emerald-500 text-emerald-600"
+                    : "bg-amber-500/10 border-amber-500 text-amber-600"
+                }`}
+              >
+                <span
+                  className={`w-1.5 h-1.5 rounded-full ${result.status === "valid" ? "bg-emerald-500 animate-pulse" : "bg-amber-500"}`}
+                />
+                {result.status}
+              </div>
+            </div>
+
+            <div
+              id="certResultCard"
+              className={`cert-result-card show w-full max-w-3xl mx-auto rounded-xl p-8 text-left shadow-md relative overflow-hidden mb-6 border bg-[#F8F9FB] dark:bg-[#0F1826] border-gray-200 dark:border-white/10 animate-[slideDown_0.4s_ease] before:content-[''] before:absolute before:top-0 before:left-0 before:right-0 before:height-[3px] ${
+                result.status === "expired"
+                  ? "expired before:bg-gradient-to-r before:from-[#EF4444] before:to-[#B91C1C]"
+                  : "before:bg-gradient-to-r before:from-[#3B82C4] before:to-[#0D1F3C]"
+              }`}
+            ><div className="absolute top-0 left-0 right-0 h-1 rounded-t-(--rx) bg-gradient-to-r from-accent to-navy-mid" />
+              {/* Card Header */}
+              <div className="cert-result-header flex items-start gap-4 mb-6">
+                {/* Seal */}
+                <div
+                  id="certSeal"
+                  className={`cert-result-seal w-[52px] h-[52px] rounded-lg flex items-center justify-center text-[1.3rem] shrink-0 text-white ${
+                    result.status === "expired"
+                      ? "expired bg-gradient-to-br from-gray-400 to-gray-600"
+                      : "bg-gradient-to-br from-[#3B82C4] to-[#0D1F3C]"
+                  }`}
+                >
+                  🏅
+                </div>
+
+                {/* Name and ID */}
+                <div className="text-left">
+                  <div
+                    id="rName"
+                    className="cert-result-name font-['Fraunces'] text-[1.2rem] font-normal text-gray-900 dark:text-gray-100 mb-1"
+                  >
+                    {result.name}
+                  </div>
+                  <div
+                    id="rId"
+                    className="cert-result-id text-[0.72rem] font-medium tracking-widest text-gray-400 uppercase"
+                  >
+                    {result.id}
+                  </div>
+                </div>
+
+                {/* Status Pill Badge */}
+               <div
+                className={`hidden md:flex ml-auto shrink-0 items-center gap-2 px-3 py-1 border rounded-full text-[0.65rem] uppercase font-bold tracking-widest ${
+                  result.status === "valid"
+                    ? "bg-emerald-500/10 border-emerald-500 text-emerald-600"
+                    : "bg-amber-500/10 border-amber-500 text-amber-600"
+                }`}
+              >
+                <span
+                  className={`w-1.5 h-1.5 rounded-full ${result.status === "valid" ? "bg-emerald-500 animate-pulse" : "bg-amber-500"}`}
+                />
+                {result.status}
+              </div>
+              </div>
+
+              {/* Details Grid */}
+              <div className="cert-details  grid grid-cols-1 md:grid-cols-2 gap-3"> 
+                {/* Type */}
+                <div className="cert-detail bg-white dark:bg-[#162a4d] border border-gray-200 dark:border-white/10 rounded-lg p-3.5 px-4 text-left">
+                  <div className="cert-detail-label text-[0.68rem] font-medium tracking-widest uppercase text-gray-400 mb-1">
+                    Certificate Type
+                  </div>
+                  <div
+                    id="rType"
+                    className="cert-detail-value text-[0.88rem] font-medium text-gray-900 dark:text-gray-200"
+                  >
+                    {result.type}
+                  </div>
+                </div>
+
+                {/* Issue Date */}
+                <div className="cert-detail bg-white dark:bg-[#162a4d] border border-gray-200 dark:border-white/10 rounded-lg p-3.5 px-4 text-left">
+                  <div className="cert-detail-label text-[0.68rem] font-medium tracking-widest uppercase text-gray-400 mb-1">
+                    Issue Date
+                  </div>
+                  <div
+                    id="rIssue"
+                    className="cert-detail-value text-[0.88rem] font-medium text-gray-900 dark:text-gray-200"
+                  >
+                    {result.issue}
+                  </div>
+                </div>
+
+                {/* Expiry Date */}
+                <div className="cert-detail bg-white dark:bg-[#162a4d] border border-gray-200 dark:border-white/10 rounded-lg p-3.5 px-4 text-left">
+                  <div className="cert-detail-label text-[0.68rem] font-medium tracking-widest uppercase text-gray-400 mb-1">
+                    Expiry Date
+                  </div>
+                  <div
+                    id="rExpiry"
+                    className="cert-detail-value text-[0.88rem] font-medium text-gray-900 dark:text-gray-200"
+                  >
+                    {result.expiry}
+                  </div>
+                </div>
+
+                {/* Issued By */}
+                <div className="cert-detail bg-white dark:bg-[#162a4d] border border-gray-200 dark:border-white/10 rounded-lg p-3.5 px-4 text-left">
+                  <div className="cert-detail-label text-[0.68rem] font-medium tracking-widest uppercase text-gray-400 mb-1">
+                    Issued By
+                  </div>
+                  <div className="cert-detail-value text-[0.88rem] font-medium text-gray-900 dark:text-gray-200">
+                    Mindsphere
+                  </div>
+                </div>
               </div>
             </div>
 
             {/* Visual Certificate */}
-            <div className="relative group shadow-2xl rounded-xl overflow-hidden bg-white aspect-[1.414/1] w-full border-[12px] border-white ring-1 ring-gray-200">
-              {/* Certificate Internal Frame */}
-              <div className="absolute inset-4 border border-[#3b82c422] rounded-lg pointer-events-none">
-                <div className="absolute inset-1.5 border-[0.5px] border-[#3b82c411] rounded-[4px]" />
+            <div className="w-full max-w-4xl mx-auto" id="certVisualWrap">
+              {/* Buttons */}
+              <div className="flex justify-end gap-3 mb-6">
+                <button
+                  className="px-4 py-2 bg-white border border-gray-200 rounded-full  text-sm font-medium flex items-center gap-2 transition cursor-pointer"
+                  onClick={() => window.print()}
+                >
+                  🖨 Print
+                </button>
+                <button
+                  className="px-4 py-2 bg-accent text-white rounded-full text-sm font-medium flex items-center gap-2 transition cursor-pointer"
+                  onClick={() => alert("Download logic here")}
+                >
+                  ⬇ Download
+                </button>
               </div>
 
-              {/* Decorative Bar */}
-              <div className="absolute left-0 top-0 bottom-0 w-2 bg-gradient-to-b from-[#0D1F3C] via-[#3B82C4] to-[#0D1F3C]" />
+              {/* The actual certificate */}
+              <div
+                id="certificateEl"
+                className="bg-must-white rounded-2xl shadow-xl ring-1 ring-[#0D1F3C]/5 overflow-hidden relative aspect-[1.414/1] flex flex-col w-full"
+              >
+                {/* Decorative elements */}
+                <div className="absolute left-0 top-0 bottom-0 w-2 bg-gradient-to-b from-[#0D1F3C] via-[#3B82C4] to-[#0D1F3C] z-10"></div>
 
-              <div className="relative h-full flex flex-col p-8 md:p-12 items-center text-center">
-                {/* Header */}
-                <div className="w-full flex justify-between items-center mb-8">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 bg-[#0D1F3C] rounded-lg flex items-center justify-center text-white font-serif text-xs">
-                      M
-                    </div>
-                    <span className="font-serif text-sm font-semibold text-[#0D1F3C]">
-                      Mind<span className="text-[#3B82C4]">sphere</span>
-                    </span>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-[0.5rem] uppercase tracking-widest text-gray-400">
-                      Certificate ID
-                    </p>
-                    <p className="text-[0.7rem] font-mono text-gray-600 font-semibold">
-                      {result.id}
-                    </p>
-                  </div>
+                {/* Frames */}
+                <div className="absolute inset-4 border-[1.5px] border-[#3B82C4]/20 rounded-xl pointer-events-none z-20 before:absolute before:inset-[6px] before:border-[0.5px] before:border-[#3B82C4]/10 before:rounded-lg"></div>
+
+                {/* Watermark */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-['Fraunces'] text-[9rem] font-semibold text-[#0D1F3C]/[0.025] tracking-tighter pointer-events-none whitespace-nowrap z-0 select-none">
+                  MS
                 </div>
 
-                {/* Content */}
-                <div className="flex-1 flex flex-col justify-center w-full">
-                  <p className="text-[0.6rem] uppercase tracking-[0.3em] text-gray-400 mb-4">
-                    This is to certify that
-                  </p>
-                  <h2 className="text-2xl md:text-4xl font-serif text-[#0D1F3C] mb-4 relative inline-block">
-                    {result.name}
-                    <div className="absolute -left-12 top-1/2 w-8 h-[1px] bg-gradient-to-r from-transparent to-gray-300 hidden md:block" />
-                    <div className="absolute -right-12 top-1/2 w-8 h-[1px] bg-gradient-to-l from-transparent to-gray-300 hidden md:block" />
-                  </h2>
-                  <p className="text-sm md:text-lg font-serif text-gray-600 mb-4">
-                    has successfully completed{" "}
-                    <span className="italic text-[#3B82C4]">{result.type}</span>
-                  </p>
-                  <p className="text-[0.65rem] md:text-xs text-gray-400 max-w-sm mx-auto leading-relaxed">
-                    {result.desc}
-                  </p>
+                {/* Corner ornaments */}
+                <div className="absolute w-8 h-8 z-30 top-5 left-5">
+                  <svg
+                    viewBox="0 0 32 32"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M2 2 L14 2 L14 4 L4 4 L4 14 L2 14 Z"
+                      fill="rgba(59,130,196,0.25)"
+                    />
+                    <path
+                      d="M2 2 L8 2 L8 3.5 L3.5 3.5 L3.5 8 L2 8 Z"
+                      fill="rgba(59,130,196,0.5)"
+                    />
+                    <circle cx="6" cy="6" r="1.5" fill="rgba(59,130,196,0.4)" />
+                  </svg>
+                </div>
+                <div className="absolute w-8 h-8 z-30 top-5 right-5 rotate-90">
+                  <svg
+                    viewBox="0 0 32 32"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M2 2 L14 2 L14 4 L4 4 L4 14 L2 14 Z"
+                      fill="rgba(59,130,196,0.25)"
+                    />
+                    <path
+                      d="M2 2 L8 2 L8 3.5 L3.5 3.5 L3.5 8 L2 8 Z"
+                      fill="rgba(59,130,196,0.5)"
+                    />
+                    <circle cx="6" cy="6" r="1.5" fill="rgba(59,130,196,0.4)" />
+                  </svg>
+                </div>
+                <div className="absolute w-8 h-8 z-30 bottom-5 left-5 -rotate-90">
+                  <svg
+                    viewBox="0 0 32 32"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M2 2 L14 2 L14 4 L4 4 L4 14 L2 14 Z"
+                      fill="rgba(59,130,196,0.25)"
+                    />
+                    <path
+                      d="M2 2 L8 2 L8 3.5 L3.5 3.5 L3.5 8 L2 8 Z"
+                      fill="rgba(59,130,196,0.5)"
+                    />
+                    <circle cx="6" cy="6" r="1.5" fill="rgba(59,130,196,0.4)" />
+                  </svg>
+                </div>
+                <div className="absolute w-8 h-8 z-30 bottom-5 right-5 rotate-180">
+                  <svg
+                    viewBox="0 0 32 32"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M2 2 L14 2 L14 4 L4 4 L4 14 L2 14 Z"
+                      fill="rgba(59,130,196,0.25)"
+                    />
+                    <path
+                      d="M2 2 L8 2 L8 3.5 L3.5 3.5 L3.5 8 L2 8 Z"
+                      fill="rgba(59,130,196,0.5)"
+                    />
+                    <circle cx="6" cy="6" r="1.5" fill="rgba(59,130,196,0.4)" />
+                  </svg>
                 </div>
 
-                {/* Footer */}
-                <div className="w-full grid grid-cols-3 items-end mt-6">
-                  <div className="text-left">
-                    <div className="w-24 h-[1px] bg-gray-200 mb-2" />
-                    <p className="text-[0.6rem] font-bold text-[#0D1F3C]">
-                      Mindsphere Team
-                    </p>
-                    <p className="text-[0.5rem] text-gray-400">
-                      Programme Director
-                    </p>
-                  </div>
-                  <div className="flex flex-col items-center">
-                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-full border-2 border-[#3b82c422] flex items-center justify-center bg-[#F4F9FF] relative">
-                      <span className="text-xl md:text-2xl">🏅</span>
-                      <div className="absolute inset-1 rounded-full border border-dashed border-[#3b82c444]" />
+                {/* Certificate content */}
+                <div className="relative z-10 flex flex-col h-full pt-10 pr-14 pb-9 pl-16">
+                  {/* Top row */}
+                  <div className="flex items-center justify-between mb-5">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#1A3560] to-[#3B82C4] flex items-center justify-center font-['Fraunces'] text-base font-semibold text-white">
+                        M
+                      </div>
+                      <div className="font-['Fraunces'] text-base font-semibold text-[#0D1F3C] tracking-tight">
+                        Mind<span className="text-[#3B82C4]">sphere</span>
+                      </div>
                     </div>
-                    <span className="text-[0.4rem] uppercase font-bold tracking-widest text-[#3B82C4] mt-1">
-                      Verified
-                    </span>
-                  </div>
-                  <div className="text-right space-y-1">
-                    <div className="inline-block px-2 py-0.5 bg-blue-50 text-[#1E4D8C] rounded-full text-[0.55rem] font-medium border border-blue-100">
-                      Issued: {result.issue}
+                    <div className="text-right">
+                      <div className="text-[0.58rem] font-medium tracking-[0.12em] uppercase text-[#8A99AE] mb-0.5">
+                        Certificate ID
+                      </div>
+                      <div className="text-[0.75rem] font-medium text-[#5A6B84] tracking-[0.04em]">
+                        {result.id}
+                      </div>
                     </div>
-                    <div className="text-[0.55rem] text-gray-400 block">
-                      Expires: {result.expiry}
+                  </div>
+
+                  {/* Divider */}
+                  <div className="h-[1px] bg-gradient-to-r from-transparent via-[#3B82C4]/25 to-transparent mb-4"></div>
+
+                  {/* Centre */}
+                  <div className="flex-1 flex flex-col justify-center text-center">
+                    <div className="text-[0.68rem] font-medium tracking-[0.2em] uppercase text-[#8A99AE] mb-2">
+                      This is to certify that
+                    </div>
+
+                    {/* Name with side lines */}
+                    <div className="relative mb-3 px-10">
+                      <div className="absolute top-1/2 left-10 w-[90px] h-[1px] bg-gradient-to-r from-transparent to-[#3B82C4]/40 origin-right"></div>
+                      <div className="font-['Fraunces'] text-[clamp(1.2rem,3.5vw,2.2rem)] font-normal tracking-[-0.02em] text-[#0D1F3C] leading-none">
+                        {result.name}
+                      </div>
+                      <div className="absolute top-1/2 right-10 w-[90px] h-[1px] bg-gradient-to-r from-[#3B82C4]/40 to-transparent"></div>
+                    </div>
+
+                    <div className="font-['Fraunces'] text-[clamp(0.9rem,2.5vw,1.6rem)] font-light tracking-[-0.02em] text-[#0D1F3C] mb-4 leading-tight">
+                      has successfully completed{" "}
+                      <em className="italic text-[#3B82C4]">{result.type}</em>
+                    </div>
+                    <div className="text-[clamp(0.6rem,1.2vw,0.78rem)] text-[#5A6B84] font-light leading-relaxed max-w-[440px] mx-auto">
+                      {result.desc}
+                    </div>
+                  </div>
+
+                  {/* Bottom row */}
+                  <div className="grid grid-cols-[1fr_auto_1fr] items-end gap-4 mt-4">
+                    {/* Signature */}
+                    <div className="text-center">
+                      <div className="w-[120px] h-[1px] bg-[#0D1F3C]/20 mx-auto mb-1"></div>
+                      <div className="text-[0.68rem] font-medium text-[#0D1F3C]">
+                        Mindsphere Team
+                      </div>
+                      <div className="text-[0.58rem] text-[#8A99AE] font-light tracking-[0.04em]">
+                        Programme Director
+                      </div>
+                    </div>
+
+                    {/* Seal */}
+                    <div className="w-[72px] h-[72px] rounded-full border-[3px] border-[#3B82C4]/25 bg-[radial-gradient(circle_at_40%_35%,rgba(255,255,255,0.9),rgba(235,243,251,0.5))] flex flex-col items-center justify-center shadow-[0_0_0_1px_rgba(59,130,196,0.1),inset_0_0_12px_rgba(59,130,196,0.06)] relative before:content-[''] before:absolute before:inset-1 before:rounded-full before:border-[0.75px] before:border-dashed before:border-[#3B82C4]/20">
+                      <div className="text-[1.4rem] leading-none">🏅</div>
+                      <div className="text-[0.38rem] font-bold tracking-[0.12em] uppercase text-[#3B82C4] mt-0.5">
+                        {result.status === "valid" ? "Verified" : "Expired"}
+                      </div>
+                    </div>
+
+                    {/* Meta Tags */}
+                    <div className="flex gap-2 justify-end flex-wrap">
+                      <span className="text-[0.6rem] font-medium tracking-[0.06em] px-2.5 py-1 rounded-full bg-[#3B82C4]/[0.08] text-[#1E4D8C] border-[0.75px] border-[#3B82C4]/20 whitespace-nowrap">
+                        Issued: {result.issue}
+                      </span>
+                      <span className="text-[0.6rem] font-medium tracking-[0.06em] px-2.5 py-1 rounded-full bg-[#3B82C4]/[0.08] text-[#1E4D8C] border-[0.75px] border-[#3B82C4]/20 whitespace-nowrap">
+                        {result.status === "valid" ? "Valid until" : "Expired"}:{" "}
+                        {result.expiry}
+                      </span>
                     </div>
                   </div>
                 </div>
-              </div>
-
-              {/* Watermark */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[10rem] font-serif font-bold text-gray-500/[0.03] select-none pointer-events-none">
-                MS
               </div>
             </div>
-
-            <button
-              onClick={() => window.print()}
-              className="px-6 py-2.5 bg-white border border-gray-200 text-gray-600 rounded-full text-xs font-medium hover:bg-gray-50 transition-all shadow-sm flex items-center gap-2 mx-auto"
-            >
-              🖨 Print or Download Certificate
-            </button>
           </div>
         )}
+        
       </div>
     </main>
   );
