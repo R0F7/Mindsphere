@@ -1,4 +1,6 @@
 import Link from "next/link";
+import PrimaryButton from "./primary-button";
+import OutlineButton from "./outline-button";
 
 export default function EventsSection() {
   // Empty state check korar jonno
@@ -218,9 +220,7 @@ export default function EventsSection() {
         )}
 
         <div className="text-center mt-9" data-aos="fade-up">
-          <Link href="/events" className="btn-outline inline-block">
-            See all past events →
-          </Link>
+          <OutlineButton href="/events">See all past events →</OutlineButton>
         </div>
       </div>
     </section>

@@ -2,6 +2,7 @@
 
 :root {
   --white: #ffffff;
+  --must-white: #ffffff;
   --off: #f7f9fc;
   --soft: #eef2f7;
   --off-white: #f7f9fc;
@@ -85,6 +86,7 @@
 
 @theme inline {
   --color-white: var(--white);
+  --color-must-white: var(--must-white);
   --color-off: var(--off);
   --color-soft: var(--soft);
   --color-off-white: var(--off-white);

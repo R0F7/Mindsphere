@@ -1,6 +1,183 @@
+// "use client";
+
+// import React, { useState, useMemo } from "react";
+
+// export default function DashboardLayout() {
+//   const [activeTab, setActiveTab] = useState("profile");
+//   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+//   const handleTabChange = (tab: string) => {
+//     setActiveTab(tab);
+//     setIsMobileMenuOpen(false);
+//   };
+
+//   return (
+//     <div className="bg-[#F8F9FB] dark:bg-[#080E1A] min-h-screen transition-colors duration-500 font-sans relative">
+//       <button
+//         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+//         className="lg:hidden fixed bottom-6 right-6 z-[70] flex flex-col justify-center items-center w-[56px] h-[56px] bg-[#0D1F3C] dark:bg-white rounded-full shadow-[0_8px_30px_rgba(0,0,0,0.12)] border-[3px] border-white dark:border-[#0D1F3C] focus:outline-none transition-transform active:scale-95"
+//         aria-label="Toggle navigation"
+//       >
+//         <span
+//           className={`block w-[22px] h-[2px] rounded-full bg-white dark:bg-[#0D1F3C] transition-transform duration-300 ease-in-out ${
+//             isMobileMenuOpen
+//               ? "rotate-45 translate-y-[6px]"
+//               : "-translate-y-[5px]"
+//           }`}
+//         ></span>
+//         <span
+//           className={`block w-[22px] h-[2px] rounded-full bg-white dark:bg-[#0D1F3C] transition-opacity duration-300 ease-in-out ${
+//             isMobileMenuOpen ? "opacity-0" : "opacity-100"
+//           }`}
+//         ></span>
+//         <span
+//           className={`block w-[22px] h-[2px] rounded-full bg-white dark:bg-[#0D1F3C] transition-transform duration-300 ease-in-out ${
+//             isMobileMenuOpen
+//               ? "-rotate-45 -translate-y-[6px]"
+//               : "translate-y-[5px]"
+//           }`}
+//         ></span>
+//       </button>
+
+//       <div
+//         className={`fixed inset-0 bg-[#0D1F3C]/40 dark:bg-black/60 backdrop-blur-sm z-[60] lg:hidden transition-all duration-300 ${
+//           isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+//         }`}
+//         onClick={() => setIsMobileMenuOpen(false)}
+//       ></div>
+
+//       {/* ─── MAIN DASHBOARD WRAPPER ─── */}
+//       <div className="flex w-full container min-h-screen lg:pt-[80px]">
+//         <div
+//           className={`
+//             fixed inset-y-0 left-0 z-[65] h-full
+//             transform lg:transform-none transition-transform duration-300 ease-in-out
+//             ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"}
+//             lg:static lg:translate-x-0 lg:block lg:w-[280px] lg:flex-shrink-0 lg:bg-transparent
+//           `}
+//         >
+//           {/* Inner Sidebar Box */}
+//           <aside className="w-[280px] sticky h-full bg-white dark:bg-[#0c1322] border-r lg:border border-gray-200 dark:border-white/10 flex flex-col gap-1 overflow-y-auto scrollbar-none shadow-2xl lg:shadow-[0_10px_40px_rgba(0,0,0,0.04)] lg:rounded-[30px_30px_0px_0px] px-4 py-10 lg:pt-[100px] lg:pb-[15px] lg:sticky lg:top-[25px] lg:h-[calc(100vh-120px)]">
+//             {/* User card at top */}
+//             <div className="flex flex-col items-center px-3 pt-5 pb-6 mb-2 border-b border-gray-100 dark:border-white/5">
+//               <div className="w-16 h-16 rounded-full bg-[#0D1F3C] dark:bg-[#3B82C4] flex items-center justify-center text-[1.3rem] font-light border-[3px] border-white dark:border-[#0D1F3C] shadow-[0_0_0_2px_#e5e7eb] dark:shadow-[0_0_0_2px_rgba(255,255,255,0.1)] font-serif overflow-hidden relative text-white">
+//                 JS
+//               </div>
+//               <div className="text-[0.97rem] font-medium text-navy dark:text-white mt-2.5 mb-0.5 text-center">
+//                 Jiya Sharma
+//               </div>
+//               <div className="text-[0.76rem] text-gray-400 dark:text-gray-500 font-light text-center">
+//                 Joined April 2025
+//               </div>
+//             </div>
+
+//             <div className="text-[0.62rem] font-semibold tracking-[0.12em] uppercase text-gray-400 dark:text-gray-500 px-3 mt-4 mb-1.5">
+//               My Account
+//             </div>
+
+//             {/* Nav Items */}
+//             <nav className="flex flex-col gap-1">
+//               <button
+//                 onClick={() => handleTabChange("profile")}
+//                 className={`flex items-center gap-2.5 px-3 py-[11px] rounded-[12px] text-[0.92rem] transition-all relative group ${
+//                   activeTab === "profile"
+//                     ? "bg-[#3B82C4]/10 text-[#0D1F3C] dark:text-[#3B82C4] font-medium"
+//                     : "text-gray-500 dark:text-gray-400 hover:bg-[#F8F9FB] dark:hover:bg-secondary/10 hover:text-[#0D1F3C] hover:dark:text-[#3B82C4]"
+//                 }`}
+//               >
+//                 {activeTab === "profile" && (
+//                   <div className="absolute left-0 top-[20%] bottom-[20%] w-[3px] bg-[#3B82C4] rounded-r-[2px]" />
+//                 )}
+//                 <div className="w-5 h-5 flex items-center justify-center shrink-0">
+//                   <svg
+//                     className="w-4 h-4 stroke-current fill-none stroke-[1.8]"
+//                     viewBox="0 0 24 24"
+//                   >
+//                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+//                     <circle cx="12" cy="7" r="4" />
+//                   </svg>
+//                 </div>
+//                 Profile & Settings
+//               </button>
+
+//               <button
+//                 onClick={() => handleTabChange("history")}
+//                 className={`flex items-center gap-2.5 px-3 py-[11px] rounded-[12px] text-[0.92rem] transition-all relative group ${
+//                   activeTab === "history"
+//                     ? "bg-[#3B82C4]/10 text-[#0D1F3C] dark:text-[#3B82C4] font-medium"
+//                     : "text-gray-500 dark:text-gray-400 hover:bg-[#F8F9FB] dark:hover:bg-secondary/10 hover:text-[#0D1F3C] hover:dark:text-[#3B82C4]"
+//                 }`}
+//               >
+//                 {activeTab === "history" && (
+//                   <div className="absolute left-0 top-[20%] bottom-[20%] w-[3px] bg-[#3B82C4] rounded-r-[2px]" />
+//                 )}
+//                 <div className="w-5 h-5 flex items-center justify-center shrink-0">
+//                   <svg
+//                     className="w-4 h-4 stroke-current fill-none stroke-[1.8]"
+//                     viewBox="0 0 24 24"
+//                   >
+//                     <rect x="3" y="4" width="18" height="18" rx="2" />
+//                     <line x1="16" y1="2" x2="16" y2="6" />
+//                     <line x1="8" y1="2" x2="8" y2="6" />
+//                     <line x1="3" y1="10" x2="21" y2="10" />
+//                   </svg>
+//                 </div>
+//                 Mental Health History
+//               </button>
+
+//               <button
+//                 onClick={() => handleTabChange("saved")}
+//                 className={`flex items-center gap-2.5 px-3 py-[11px] rounded-[12px] text-[0.92rem] transition-all relative group ${
+//                   activeTab === "saved"
+//                     ? "bg-[#3B82C4]/10 text-[#0D1F3C] dark:text-[#3B82C4] font-medium"
+//                     : "text-gray-500 dark:text-gray-400 hover:bg-[#F8F9FB] dark:hover:bg-secondary/10 hover:text-[#0D1F3C] hover:dark:text-[#3B82C4]"
+//                 }`}
+//               >
+//                 {activeTab === "saved" && (
+//                   <div className="absolute left-0 top-[20%] bottom-[20%] w-[3px] bg-[#3B82C4] rounded-r-[2px]" />
+//                 )}
+//                 <div className="w-5 h-5 flex items-center justify-center shrink-0">
+//                   <svg
+//                     className="w-4 h-4 stroke-current fill-none stroke-[1.8]"
+//                     viewBox="0 0 24 24"
+//                   >
+//                     <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+//                   </svg>
+//                 </div>
+//                 Saved & Activity
+//               </button>
+//             </nav>
+
+//             {/* Logout */}
+//             <div className="mt-auto pt-4 border-t border-gray-100 dark:border-white/5">
+//               <button className="flex items-center gap-2.5 px-3 py-2.5 rounded-[12px] text-[0.875rem] text-[#ef4444] hover:bg-red-50 dark:hover:bg-red-500/10 transition-all w-full">
+//                 <svg
+//                   className="w-4 h-4 stroke-current fill-none stroke-[1.8]"
+//                   viewBox="0 0 24 24"
+//                 >
+//                   <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+//                   <polyline points="16 17 21 12 16 7" />
+//                   <line x1="21" y1="12" x2="9" y2="12" />
+//                 </svg>
+//                 Log out
+//               </button>
+//             </div>
+//           </aside>
+//         </div>
+
+//         <div className="flex-1 w-full min-w-0 pt-[80px] lg:pt-0 p-4 sm:p-6 lg:pl-10 pb-[100px]">
+//           {activeTab === "profile" && <DashboardProfile />}{" "}
+//           {activeTab === "history" && <MentalHealthHistory />}{" "}
+//           {activeTab === "saved" && <SavedAndActivityPanel />}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 export default function DashboardLayout() {
   const [activeTab, setActiveTab] = useState("profile");
@@ -13,28 +190,34 @@ export default function DashboardLayout() {
 
   return (
     <div className="bg-[#F8F9FB] dark:bg-[#080E1A] min-h-screen transition-colors duration-500 font-sans relative">
+      {/* Mobile Menu Button */}
       <button
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        className="lg:hidden fixed bottom-6 right-6 z-[70] flex flex-col justify-center items-center w-[56px] h-[56px] bg-[#0D1F3C] dark:bg-white rounded-full shadow-[0_8px_30px_rgba(0,0,0,0.12)] border-[3px] border-white dark:border-[#0D1F3C] focus:outline-none transition-transform active:scale-95"
+        className="lg:hidden fixed bottom-6 right-6 z-[70] flex flex-col justify-center items-center w-[56px] h-[56px] bg-navy rounded-full shadow-[0_8px_30px_rgba(0,0,0,0.12)] border-[3px] border-white dark:border-[#0D1F3C] focus:outline-none transition-transform active:scale-95"
         aria-label="Toggle navigation"
       >
+        {/* Top Line */}
         <span
-          className={`block w-[22px] h-[2px] rounded-full bg-white dark:bg-[#0D1F3C] transition-transform duration-300 ease-in-out ${
+          className={`block w-[22px] h-[2px] rounded-full bg-white dark:bg-[#0D1F3C] transition-all duration-300 ease-in-out origin-center ${
             isMobileMenuOpen
-              ? "rotate-45 translate-y-[6px]"
-              : "-translate-y-[5px]"
+              ? "rotate-45 translate-y-[2px]"
+              : "-translate-y-[6px]"
           }`}
         ></span>
+
+        {/* Middle Line */}
         <span
           className={`block w-[22px] h-[2px] rounded-full bg-white dark:bg-[#0D1F3C] transition-opacity duration-300 ease-in-out ${
             isMobileMenuOpen ? "opacity-0" : "opacity-100"
           }`}
         ></span>
+
+        {/* Bottom Line */}
         <span
-          className={`block w-[22px] h-[2px] rounded-full bg-white dark:bg-[#0D1F3C] transition-transform duration-300 ease-in-out ${
+          className={`block w-[22px] h-[2px] rounded-full bg-white dark:bg-[#0D1F3C] transition-all duration-300 ease-in-out origin-center ${
             isMobileMenuOpen
-              ? "-rotate-45 -translate-y-[6px]"
-              : "translate-y-[5px]"
+              ? "-rotate-45 -translate-y-[2px]"
+              : "translate-y-[6px]"
           }`}
         ></span>
       </button>
@@ -46,129 +229,127 @@ export default function DashboardLayout() {
         onClick={() => setIsMobileMenuOpen(false)}
       ></div>
 
-      {/* ─── MAIN DASHBOARD WRAPPER ─── */}
-      <div className="flex w-full container min-h-screen lg:pt-[80px]">
-        <div
+      {/* ─── MAIN DASHBOARD WRAPPER  ─── */}
+      <div className="flex items-start w-full container mx-auto min-h-screen lg:pt-[80px]">
+        <aside
           className={`
-            fixed inset-y-0 left-0 z-[65] h-full
+            fixed inset-y-0 left-0 z-65 lg:z-0 w-[280px] h-full lg:!h-[669px]
             transform transition-transform duration-300 ease-in-out
             ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"}
-            
-            /* Desktop Styles */
-            lg:static lg:translate-x-0 lg:block lg:w-[280px] lg:flex-shrink-0 lg:bg-transparent
+            lg:sticky lg:top-[100px] lg:h-[calc(100vh-120px)] lg:translate-x-0 lg:transform-none lg:flex-shrink-0
+            bg-white dark:bg-[#0c1322] border-r lg:border border-gray-200 dark:border-white/10 
+            flex flex-col gap-1 overflow-y-auto scrollbar-none shadow-2xl lg:shadow-[0_10px_40px_rgba(0,0,0,0.04)] 
+            lg:rounded-[30px_30px_0px_0px] px-4 py-10 lg:pt-[30px] lg:pb-[15px]
           `}
         >
-          {/* Inner Sidebar Box */}
-          <aside className="w-[280px] h-full bg-white dark:bg-[#0c1322] border-r lg:border border-gray-200 dark:border-white/10 flex flex-col gap-1 overflow-y-auto scrollbar-none shadow-2xl lg:shadow-[0_10px_40px_rgba(0,0,0,0.04)] lg:rounded-[30px_30px_0px_0px] px-4 py-10 lg:pt-[100px] lg:pb-[15px] lg:sticky lg:top-[25px] lg:h-[669px]">
-            {/* User card at top */}
-            <div className="flex flex-col items-center px-3 pt-5 pb-6 mb-2 border-b border-gray-100 dark:border-white/5">
-              <div className="w-16 h-16 rounded-full bg-[#0D1F3C] dark:bg-[#3B82C4] flex items-center justify-center text-[1.3rem] font-light border-[3px] border-white dark:border-[#0D1F3C] shadow-[0_0_0_2px_#e5e7eb] dark:shadow-[0_0_0_2px_rgba(255,255,255,0.1)] font-serif overflow-hidden relative text-white">
-                JS
-              </div>
-              <div className="text-[0.97rem] font-medium text-navy dark:text-white mt-2.5 mb-0.5 text-center">
-                Jiya Sharma
-              </div>
-              <div className="text-[0.76rem] text-gray-400 dark:text-gray-500 font-light text-center">
-                Joined April 2025
-              </div>
+          {/* User card at top */}
+          <div className="flex flex-col items-center px-3 pt-5 pb-6 mb-2 border-b border-gray-100 dark:border-white/5">
+            <div className="w-16 h-16 rounded-full bg-[#0D1F3C] dark:bg-[#3B82C4] flex items-center justify-center text-[1.3rem] font-light border-[3px] border-white dark:border-[#0D1F3C] shadow-[0_0_0_2px_#e5e7eb] dark:shadow-[0_0_0_2px_rgba(255,255,255,0.1)] font-serif overflow-hidden relative text-white">
+              JS
             </div>
-
-            <div className="text-[0.62rem] font-semibold tracking-[0.12em] uppercase text-gray-400 dark:text-gray-500 px-3 mt-4 mb-1.5">
-              My Account
+            <div className="text-[0.97rem] font-medium text-navy dark:text-white mt-2.5 mb-0.5 text-center">
+              Jiya Sharma
             </div>
+            <div className="text-[0.76rem] text-gray-400 dark:text-gray-500 font-light text-center">
+              Joined April 2025
+            </div>
+          </div>
 
-            {/* Nav Items */}
-            <nav className="flex flex-col gap-1">
-              <button
-                onClick={() => handleTabChange("profile")}
-                className={`flex items-center gap-2.5 px-3 py-[11px] rounded-[12px] text-[0.92rem] transition-all relative group ${
-                  activeTab === "profile"
-                    ? "bg-[#3B82C4]/10 text-[#0D1F3C] dark:text-[#3B82C4] font-medium"
-                    : "text-gray-500 dark:text-gray-400 hover:bg-[#F8F9FB] dark:hover:bg-secondary/10 hover:text-[#0D1F3C] hover:dark:text-[#3B82C4]"
-                }`}
-              >
-                {activeTab === "profile" && (
-                  <div className="absolute left-0 top-[20%] bottom-[20%] w-[3px] bg-[#3B82C4] rounded-r-[2px]" />
-                )}
-                <div className="w-5 h-5 flex items-center justify-center shrink-0">
-                  <svg
-                    className="w-4 h-4 stroke-current fill-none stroke-[1.8]"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                    <circle cx="12" cy="7" r="4" />
-                  </svg>
-                </div>
-                Profile & Settings
-              </button>
+          <div className="text-[0.62rem] font-semibold tracking-[0.12em] uppercase text-gray-400 dark:text-gray-500 px-3 mt-4 mb-1.5">
+            My Account
+          </div>
 
-              <button
-                onClick={() => handleTabChange("history")}
-                className={`flex items-center gap-2.5 px-3 py-[11px] rounded-[12px] text-[0.92rem] transition-all relative group ${
-                  activeTab === "history"
-                    ? "bg-[#3B82C4]/10 text-[#0D1F3C] dark:text-[#3B82C4] font-medium"
-                    : "text-gray-500 dark:text-gray-400 hover:bg-[#F8F9FB] dark:hover:bg-secondary/10 hover:text-[#0D1F3C] hover:dark:text-[#3B82C4]"
-                }`}
-              >
-                {activeTab === "history" && (
-                  <div className="absolute left-0 top-[20%] bottom-[20%] w-[3px] bg-[#3B82C4] rounded-r-[2px]" />
-                )}
-                <div className="w-5 h-5 flex items-center justify-center shrink-0">
-                  <svg
-                    className="w-4 h-4 stroke-current fill-none stroke-[1.8]"
-                    viewBox="0 0 24 24"
-                  >
-                    <rect x="3" y="4" width="18" height="18" rx="2" />
-                    <line x1="16" y1="2" x2="16" y2="6" />
-                    <line x1="8" y1="2" x2="8" y2="6" />
-                    <line x1="3" y1="10" x2="21" y2="10" />
-                  </svg>
-                </div>
-                Mental Health History
-              </button>
-
-              <button
-                onClick={() => handleTabChange("saved")}
-                className={`flex items-center gap-2.5 px-3 py-[11px] rounded-[12px] text-[0.92rem] transition-all relative group ${
-                  activeTab === "saved"
-                    ? "bg-[#3B82C4]/10 text-[#0D1F3C] dark:text-[#3B82C4] font-medium"
-                    : "text-gray-500 dark:text-gray-400 hover:bg-[#F8F9FB] dark:hover:bg-secondary/10 hover:text-[#0D1F3C] hover:dark:text-[#3B82C4]"
-                }`}
-              >
-                {activeTab === "saved" && (
-                  <div className="absolute left-0 top-[20%] bottom-[20%] w-[3px] bg-[#3B82C4] rounded-r-[2px]" />
-                )}
-                <div className="w-5 h-5 flex items-center justify-center shrink-0">
-                  <svg
-                    className="w-4 h-4 stroke-current fill-none stroke-[1.8]"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
-                  </svg>
-                </div>
-                Saved & Activity
-              </button>
-            </nav>
-
-            {/* Logout */}
-            <div className="mt-auto pt-4 border-t border-gray-100 dark:border-white/5">
-              <button className="flex items-center gap-2.5 px-3 py-2.5 rounded-[12px] text-[0.875rem] text-[#ef4444] hover:bg-red-50 dark:hover:bg-red-500/10 transition-all w-full">
+          {/* Nav Items */}
+          <nav className="flex flex-col gap-1">
+            <button
+              onClick={() => handleTabChange("profile")}
+              className={`flex items-center gap-2.5 px-3 py-[11px] rounded-[12px] text-[0.92rem] transition-all relative group ${
+                activeTab === "profile"
+                  ? "bg-[#3B82C4]/10 text-[#0D1F3C] dark:text-[#3B82C4] font-medium"
+                  : "text-gray-500 dark:text-gray-400 hover:bg-[#F8F9FB] dark:hover:bg-secondary/10 hover:text-[#0D1F3C] hover:dark:text-[#3B82C4]"
+              }`}
+            >
+              {activeTab === "profile" && (
+                <div className="absolute left-0 top-[20%] bottom-[20%] w-[3px] bg-[#3B82C4] rounded-r-[2px]" />
+              )}
+              <div className="w-5 h-5 flex items-center justify-center shrink-0">
                 <svg
                   className="w-4 h-4 stroke-current fill-none stroke-[1.8]"
                   viewBox="0 0 24 24"
                 >
-                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                  <polyline points="16 17 21 12 16 7" />
-                  <line x1="21" y1="12" x2="9" y2="12" />
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
                 </svg>
-                Log out
-              </button>
-            </div>
-          </aside>
-        </div>
+              </div>
+              Profile & Settings
+            </button>
 
-        {/* 'min-w-0' ta hocche flex bug er ekta master key, jate choto screen e choriye na jay */}
-        <div className="flex-1 w-full min-w-0 pt-[80px] lg:pt-0 p-4 sm:p-6 lg:pl-10 pb-[100px]">
+            <button
+              onClick={() => handleTabChange("history")}
+              className={`flex items-center gap-2.5 px-3 py-[11px] rounded-[12px] text-[0.92rem] transition-all relative group ${
+                activeTab === "history"
+                  ? "bg-[#3B82C4]/10 text-[#0D1F3C] dark:text-[#3B82C4] font-medium"
+                  : "text-gray-500 dark:text-gray-400 hover:bg-[#F8F9FB] dark:hover:bg-secondary/10 hover:text-[#0D1F3C] hover:dark:text-[#3B82C4]"
+              }`}
+            >
+              {activeTab === "history" && (
+                <div className="absolute left-0 top-[20%] bottom-[20%] w-[3px] bg-[#3B82C4] rounded-r-[2px]" />
+              )}
+              <div className="w-5 h-5 flex items-center justify-center shrink-0">
+                <svg
+                  className="w-4 h-4 stroke-current fill-none stroke-[1.8]"
+                  viewBox="0 0 24 24"
+                >
+                  <rect x="3" y="4" width="18" height="18" rx="2" />
+                  <line x1="16" y1="2" x2="16" y2="6" />
+                  <line x1="8" y1="2" x2="8" y2="6" />
+                  <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+              </div>
+              Mental Health History
+            </button>
+
+            <button
+              onClick={() => handleTabChange("saved")}
+              className={`flex items-center gap-2.5 px-3 py-[11px] rounded-[12px] text-[0.92rem] transition-all relative group ${
+                activeTab === "saved"
+                  ? "bg-[#3B82C4]/10 text-[#0D1F3C] dark:text-[#3B82C4] font-medium"
+                  : "text-gray-500 dark:text-gray-400 hover:bg-[#F8F9FB] dark:hover:bg-secondary/10 hover:text-[#0D1F3C] hover:dark:text-[#3B82C4]"
+              }`}
+            >
+              {activeTab === "saved" && (
+                <div className="absolute left-0 top-[20%] bottom-[20%] w-[3px] bg-[#3B82C4] rounded-r-[2px]" />
+              )}
+              <div className="w-5 h-5 flex items-center justify-center shrink-0">
+                <svg
+                  className="w-4 h-4 stroke-current fill-none stroke-[1.8]"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+                </svg>
+              </div>
+              Saved & Activity
+            </button>
+          </nav>
+
+          {/* Logout */}
+          <div className="mt-auto pt-4 border-t border-gray-100 dark:border-white/5">
+            <button className="flex items-center gap-2.5 px-3 py-2.5 rounded-[12px] text-[0.875rem] text-[#ef4444] hover:bg-red-50 dark:hover:bg-red-500/10 transition-all w-full">
+              <svg
+                className="w-4 h-4 stroke-current fill-none stroke-[1.8]"
+                viewBox="0 0 24 24"
+              >
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                <polyline points="16 17 21 12 16 7" />
+                <line x1="21" y1="12" x2="9" y2="12" />
+              </svg>
+              Log out
+            </button>
+          </div>
+        </aside>
+
+        {/* --- CONTENT AREA --- */}
+        <div className="flex-1 w-full min-w-0 pt-[80px]  p-4 sm:p-6 lg:pl-10 pb-[100px]">
           {activeTab === "profile" && <DashboardProfile />}{" "}
           {activeTab === "history" && <MentalHealthHistory />}{" "}
           {activeTab === "saved" && <SavedAndActivityPanel />}
@@ -181,14 +362,16 @@ export default function DashboardLayout() {
 // part:1
 function DashboardProfile() {
   const [isDirty, setIsDirty] = useState(false);
+  const [showCurrent, setShowCurrent] = useState(false);
+  const [showNew, setShowNew] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   return (
     <>
       {/* ── PROFILE & SETTINGS HEADER ── */}
-      <div className="mb-9 animate-[fadeIn_0.35s_ease]">
-        <h1 className="font-serif text-[clamp(1.8rem,3vw,2.4rem)] font-light text-navy leading-tight tracking-[-0.025em] mb-1.5">
-          Profile &{" "}
-          <em className="italic text-[#3B82C4] not-italic">Settings</em>
+      <div data-aos="fade-down" className="mb-9 animate-[fadeIn_0.35s_ease]">
+        <h1 className="font-fraunces text-[clamp(1.8rem,3vw,2.4rem)] font-light text-navy leading-tight tracking-[-0.025em] mb-1.5">
+          Profile & <em className="italic text-[#3B82C4]">Settings</em>
         </h1>
         <p className="text-[0.95rem] text-gray-500 dark:text-gray-400 font-light">
           Manage your account information and preferences
@@ -196,7 +379,10 @@ function DashboardProfile() {
       </div>
 
       {/* ── PROFILE HERO CARD ── */}
-      <div className="bg-white border border-strong rounded-xl p-9 shadow-[0_10px_40px_rgba(0,0,0,0.04)] mb-6 transition-all">
+      <div
+        data-aos="fade-up"
+        className="bg-white border border-strong rounded-xl p-9 shadow-[0_10px_40px_rgba(0,0,0,0.04)] mb-6 transition-all"
+      >
         <div className="flex flex-col lg:flex-row items-start gap-7 flex-wrap">
           {/* Avatar Wrap */}
           <div className="relative shrink-0">
@@ -266,7 +452,11 @@ function DashboardProfile() {
       </div>
 
       {/* ── PERSONAL INFORMATION CARD ── */}
-      <div className="bg-white border border-strong rounded-xl p-9 shadow-[0_10px_40px_rgba(0,0,0,0.04)] mb-6 transition-all">
+      <div
+        data-aos="fade-up"
+        data-aos-duration="600"
+        className="bg-white border border-strong rounded-xl p-9 shadow-[0_10px_40px_rgba(0,0,0,0.04)] mb-6 transition-all"
+      >
         <h3 className="font-serif text-[1.2rem] font-normal text-navy mb-1.5">
           Personal Information
         </h3>
@@ -310,17 +500,124 @@ function DashboardProfile() {
         </div>
 
         <div className="flex gap-2.5 flex-wrap">
-          <button className="p-[12px_26px] bg-[#0D1F3C] dark:bg-[#3B82C4] text-white rounded-full text-[0.92rem] font-medium hover:-translate-y-px hover:shadow-lg transition-all active:scale-95">
+          <button className="p-[12px_26px] bg-[#0D1F3C] dark:bg-[#3B82C4] text-white rounded-full text-[0.92rem] font-medium hover:-translate-y-px hover:shadow-lg transition-all active:scale-95 cursor-pointer">
             Save changes
           </button>
-          <button className="p-[12px_26px] border border-gray-200 dark:border-white/10 text-navy rounded-full text-[0.92rem] font-light hover:bg-gray-50 dark:hover:bg-white/5 transition-all">
+          <button className="p-[12px_26px] border border-strong bg-soft-grey b g-gray-100 text-navy rounded-full text-[0.92rem] font-light hover:bg-gray-50 dark:hover:bg-white/5 transition-all cursor-pointer">
             Discard
           </button>
         </div>
       </div>
 
+      {/* CHANGE PASSWORD */}
+      <div
+        data-aos="fade-up"
+        data-aos-duration="650"
+        className="bg-white border border-strong rounded-xl p-9 shadow-[0_10px_40px_rgba(0,0,0,0.04)] mb-6 transition-all"
+      >
+        <h3 className="font-serif text-[1.2rem] font-normal text-navy dark:text-white mb-1.5">
+          Change Password
+        </h3>
+        <p className="text-[0.88rem] text-gray-400 dark:text-gray-500 font-light mb-6">
+          Choose a strong password to keep your account secure
+        </p>
+
+        <div className="space-y-5">
+          {/* Current Password */}
+          <div className="flex flex-col gap-1.5">
+            <label className="text-[0.83rem] font-medium text-gray-500 dark:text-gray-400">
+              Current password
+            </label>
+            <div className="relative">
+              <input
+                type={showCurrent ? "text" : "password"}
+                className="w-full p-[13px_16px] border-[1.5px] border-gray-200 dark:border-white/10 rounded-[12px] text-[0.95rem] bg-white dark:bg-secondary/20 outline-none focus:border-[#3B82C4] focus:ring-4 focus:ring-[#3B82C4]/5 transition-all pr-12"
+                placeholder="Enter current password"
+              />
+              <div
+                className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
+                onClick={() => setShowCurrent(!showCurrent)}
+              >
+                <svg
+                  className="w-5 h-5 stroke-current fill-none stroke-[1.5]"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          {/* New & Confirm Password Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* New Password */}
+            <div className="flex flex-col gap-1.5">
+              <label className="text-[0.83rem] font-medium text-gray-500 dark:text-gray-400">
+                New password
+              </label>
+              <div className="relative">
+                <input
+                  type={showNew ? "text" : "password"}
+                  className="w-full p-[13px_16px] border-[1.5px] border-gray-200 dark:border-white/10 rounded-[12px] text-[0.95rem] bg-white dark:bg-secondary/20 outline-none focus:border-[#3B82C4] focus:ring-4 focus:ring-[#3B82C4]/5 transition-all pr-12"
+                  placeholder="Min 8 characters"
+                />
+                <div
+                  className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
+                  onClick={() => setShowNew(!showNew)}
+                >
+                  <svg
+                    className="w-5 h-5 stroke-current fill-none stroke-[1.5]"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            {/* Confirm Password */}
+            <div className="flex flex-col gap-1.5">
+              <label className="text-[0.83rem] font-medium text-gray-500 dark:text-gray-400">
+                Confirm new password
+              </label>
+              <div className="relative">
+                <input
+                  type={showConfirm ? "text" : "password"}
+                  className="w-full p-[13px_16px] border-[1.5px] border-gray-200 dark:border-white/10 rounded-[12px] text-[0.95rem] bg-white dark:bg-secondary/20 outline-none focus:border-[#3B82C4] focus:ring-4 focus:ring-[#3B82C4]/5 transition-all pr-12"
+                  placeholder="Repeat new password"
+                />
+                <div
+                  className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
+                  onClick={() => setShowConfirm(!showConfirm)}
+                >
+                  <svg
+                    className="w-5 h-5 stroke-current fill-none stroke-[1.5]"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-6">
+          <button className="p-[12px_26px] bg-[#0D1F3C] dark:bg-[#3B82C4] text-white rounded-full text-[0.92rem] font-medium hover:-translate-y-px hover:shadow-lg transition-all active:scale-95 cursor-pointer">
+            Update password
+          </button>
+        </div>
+      </div>
+
       {/* ── PREFERENCES CARD (Toggle Switches) ── */}
-      <div className="bg-white border border-strong rounded-xl p-9 shadow-[0_10px_40px_rgba(0,0,0,0.04)] mb-6 transition-all">
+      <div
+        data-aos="fade-up"
+        data-aos-duration="700"
+        className="bg-white border border-strong rounded-xl p-9 shadow-[0_10px_40px_rgba(0,0,0,0.04)] mb-6 transition-all"
+      >
         <h3 className="font-serif text-[1.2rem] font-normal text-navy mb-1.5">
           Preferences
         </h3>
@@ -355,7 +652,7 @@ function DashboardProfile() {
                   {toggle.desc}
                 </div>
               </div>
-              <label className="relative w-11 h-6 cursor-pointer">
+              <label className="relative w-11 h-6 cursor-pointer shrink-0">
                 <input
                   type="checkbox"
                   className="sr-only peer"
@@ -372,7 +669,11 @@ function DashboardProfile() {
       </div>
 
       {/* ── DANGER ZONE ── */}
-      <div className="bg-white border border-red-500/40 rounded-xl p-9 shadow-[0_10px_40px_rgba(0,0,0,0.04)] transition-all">
+      <div
+        data-aos="fade-up"
+        data-aos-duration="750"
+        className="bg-white border border-red-500/40 rounded-xl p-9 shadow-[0_10px_40px_rgba(0,0,0,0.04)] transition-all"
+      >
         <h3 className="font-serif text-[1.2rem] font-normal text-[#ef4444] mb-1.5">
           Danger Zone
         </h3>
@@ -639,6 +940,19 @@ const MentalHealthHistory: React.FC = () => {
   }, []);
   const [selectedCi, setSelectedCi] = useState<any>(null);
   const [selectedScr, setSelectedScr] = useState<any>(null);
+  const [nullMode, setNullMode] = useState<any>("");
+
+  useEffect(() => {
+    if (selectedDate) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [selectedDate]);
 
   /* ─── RENDER SVG RING ─── */
   const renderRing = (
@@ -685,9 +999,8 @@ const MentalHealthHistory: React.FC = () => {
     <div className="space-y-10 min-h-screen text-slate-800 font-sans">
       {/* ── PAGE HEADER ── */}
       <div className="space-y-1" data-aos="fade-down">
-        <h1 className="text-3xl font-serif text-navy">
-          Mental Health{" "}
-          <em className="italic font-normal text-accent">History</em>
+        <h1 className="font-fraunces text-[clamp(1.8rem,3vw,2.4rem)] font-light text-navy leading-tight tracking-[-0.025em] mb-1.5">
+          Mental Health <em className="italic text-[#3B82C4]">History</em>
         </h1>
         <p className="text-slate-500 text-sm">
           Your mood logs — click any highlighted date to view your entry
@@ -741,7 +1054,7 @@ const MentalHealthHistory: React.FC = () => {
           {DAYS.map((day) => (
             <div
               key={day}
-              className="text-center text-[11px] font-bold tracking-[0.1em] uppercase text-slate-400 py-2"
+              className="text-center text-[12px] font-semibold tracking-[0.1em] uppercase text-slate-400 py-2"
             >
               {day}
             </div>
@@ -755,19 +1068,25 @@ const MentalHealthHistory: React.FC = () => {
             return (
               <div
                 key={idx}
-                onClick={() => entry && setSelectedDate(dateStr)}
+                onClick={() => {
+                  if (entry) {
+                    setSelectedDate(dateStr);
+                  } else {
+                    setNullMode(dateStr);
+                  }
+                }}
                 className={`aspect-square flex flex-col items-center justify-center rounded-2xl relative transition-all group
-                  ${!item.current ? "opacity-20 pointer-events-none" : "hover:bg-slate-50 cursor-pointer"}
+                  ${!item.current ? "opacity-20 pointer-events-none" : "hover:bg-navy/5 cursor-pointer"}
                   ${entry ? "has-entry" : ""}`}
               >
                 <div
-                  className={`w-8 h-8 flex items-center justify-center text-sm rounded-full transition-all
-                  ${entry ? "bg-indigo-50 text-indigo-700 font-semibold group-hover:bg-indigo-600 group-hover:text-white" : "text-slate-600"}`}
+                  className={`w-9 h-9 flex items-center justify-center text-lg rounded-full transition-all
+                  ${entry ? "bg-blue/10 dark:bg-blue/30 text-accent font-semibold group-hover:bg-blue group-hover:text-must-white" : "text-navy/70"}`}
                 >
                   {item.day}
                 </div>
                 {entry && (
-                  <div className="text-[10px] mt-0.5">
+                  <div className="text-[12px] mt-0.5">
                     {MOOD_MAP[entry.mood].emoji}
                   </div>
                 )}
@@ -843,11 +1162,14 @@ const MentalHealthHistory: React.FC = () => {
             <div
               key={e.id}
               onClick={() => setSelectedCi(e)}
-              className="group flex flex-col-reverse md:flex-row gap-2 md:gap-0 bg-white p-4 rounded-2xl border border-border hover:border-indigo-200 hover:shadow-md transition-all cursor-pointer"
+              className={`group relative flex flex-col-reverse md:flex-row gap-2 md:gap-0 bg-white p-4 rounded-2xl border border-border hover:shadow-md hover:border-strong hover:translate-x-1.5 transition-all overflow-hidden`}
             >
+              <div
+                className={`absolute top-0 left-0 right-0 h-full w-1 rounded-t-(--rx) bg-[${SCR_COLORS[e.level]}] opacity-0 transition-opacity duration-300 group-hover:opacity-100`}
+              />
               <div className="flex-1 flex items-center">
-                <div className="flex flex-col items-center justify-center bg-slate-100 w-12 h-12 rounded-md mr-4 group-hover:bg-indigo-50 transition-colors">
-                  <span className="text-lg font-bold text-slate-700 leading-none">
+                <div className="flex flex-col items-center justify-center bg-slate-100 dark:bg-navy/10 w-12 h-12 rounded-md mr-4 group-hover :bg-indigo-50 transition-colors">
+                  <span className="text-lg font-bold text-navy/80 leading-none font-fraunces">
                     {e.day}
                   </span>
                   <span className="text-[10px] font-bold text-slate-400 uppercase leading-none mt-1">
@@ -904,7 +1226,7 @@ const MentalHealthHistory: React.FC = () => {
             <div
               key={e.id}
               onClick={() => setSelectedScr(e)}
-              className="flex items-center bg-white p-5 rounded-2xl border border-border hover:shadow-lg hover:border-indigo-200 transition-all cursor-pointer group"
+              className="flex items-center bg-white p-5 rounded-2xl border border-border hover:shadow-md hover:border-strong hover:translate-x-1.5 transition-all cursor-pointer group"
             >
               <div className="relative mr-5">
                 {renderRing(e.score, e.max, e.level, 56, 6)}
@@ -940,23 +1262,27 @@ const MentalHealthHistory: React.FC = () => {
 
       {/* ── CALENDAR ENTRY MODAL ── */}
       {selectedDate && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm animate-in fade-in duration-300">
-          <div className="bg-white p-8 rounded-[2.5rem] shadow-2xl max-w-sm w-full relative">
+        <div
+          onClick={() => setSelectedDate(null)}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm animate-in fade-in duration-300"
+        >
+          <div className="bg-white p-8 rounded-xl shadow-2xl max-w-sm w-full relative">
             <button
+              type="button"
+              className="modal-close absolute top-4 right-4 w-8 h-8 rounded-full border border-border flex items-center justify-center color-[var(--text-muted)] text-[1.1rem] transition-all duration-200 bg-transparent cursor-pointer hover:bg-soft-grey"
               onClick={() => setSelectedDate(null)}
-              className="absolute top-6 right-6 text-slate-300 hover:text-slate-800 text-2xl"
             >
               ×
             </button>
             <div className="text-slate-400 text-[10px] font-bold uppercase tracking-[0.2em] mb-4">
               {selectedDate}
             </div>
-            <div className="flex items-center gap-4 p-5 bg-slate-50 rounded-3xl mb-6">
+            <div className="flex items-center gap-4 mb-6">
               <span className="text-5xl">
                 {MOOD_MAP[MOOD_ENTRIES[selectedDate].mood].emoji}
               </span>
               <div>
-                <p className="text-lg font-bold text-slate-800">
+                <p className="text-lg font-medium text-navy/80 font-fraunces">
                   {MOOD_MAP[MOOD_ENTRIES[selectedDate].mood].label}
                 </p>
                 <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">
@@ -964,9 +1290,36 @@ const MentalHealthHistory: React.FC = () => {
                 </p>
               </div>
             </div>
-            <p className="text-slate-600 italic leading-relaxed">
-              "{MOOD_ENTRIES[selectedDate].note}"
+            <span className="inline-block mb-1 text-sm text-muted">NOTE</span>
+            <p className="text-navy/60 leading-relaxed p-5 bg-slate-50 rounded-md border border-strong">
+              {MOOD_ENTRIES[selectedDate].note}
             </p>
+          </div>
+        </div>
+      )}
+
+      {/* ── CALENDAR EMPTY MODAL ── */}
+      {nullMode && (
+        <div
+          onClick={() => setNullMode(false)}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm animate-in fade-in duration-300"
+        >
+          <div className="bg-white p-8 rounded-xl shadow-2xl max-w-sm w-full relative">
+            <button
+              type="button"
+              className="modal-close absolute top-4 right-4 w-8 h-8 rounded-full border border-border flex items-center justify-center color-[var(--text-muted)] text-[1.1rem] transition-all duration-200 bg-transparent cursor-pointer hover:bg-soft-grey"
+              onClick={() => setNullMode(false)}
+            >
+              ×
+            </button>
+            <div className="text-center space-y-2">
+              <div className="text-4xl">📭</div>
+              <div className="text-xl text-navy">No mood entry</div>
+              <div className="text-sm text-navy/70">
+                No mood was logged for {nullMode}.<br />
+                Head to the Support page to log today's mood.
+              </div>
+            </div>
           </div>
         </div>
       )}
@@ -1165,19 +1518,19 @@ const SavedAndActivityPanel: React.FC = () => {
   const [activeTab, setActiveTab] = useState<"saved" | "activity">("saved");
 
   return (
-    <div className="p-6">
+    <div className="">
       {/* ── PAGE HEADER ── */}
-      <div className="mb-8">
-        <div className="font-serif text-3xl text-navy mb-1">
-          Saved & <em className="italic font-light text-accent">Activity</em>
-        </div>
+      <div  data-aos="fade-down" className="mb-8">
+        <h1 className="font-fraunces text-[clamp(1.8rem,3vw,2.4rem)] font-light text-navy leading-tight tracking-[-0.025em] mb-1.5">
+          Saved <em className="italic text-[#3B82C4]">& Activity</em>
+        </h1>
         <div className="text-sm text-slate-500 font-light">
           Your saved resources and blog comments
         </div>
       </div>
 
       {/* ── INNER TABS ── */}
-      <div className="flex gap-1 p-[5px] bg-slate-100 rounded-full mb-7 w-fit">
+      <div  data-aos="fade-down" className="flex gap-1 p-[5px] bg-slate-100 rounded-full mb-7 w-fit">
         <button
           onClick={() => setActiveTab("saved")}
           className={`text-[0.875rem] px-[22px] py-[9px] rounded-full transition-all duration-200 cursor-pointer ${
@@ -1207,38 +1560,41 @@ const SavedAndActivityPanel: React.FC = () => {
           <div className="animate-in fade-in duration-300">
             {SAVED_RESOURCES.length > 0 ? (
               <div className="grid md:grid-cols-2 gap-[18px]">
-                {SAVED_RESOURCES.map((item) => (
+                {SAVED_RESOURCES.map((item, i) => (
                   <div
+                    data-aos="fade-up"
+                    data-aos-duration={400 + i * 100}
                     key={item.id}
-                    className="bg-white border border-strong rounded-[1.25rem] overflow-hidden transition-all duration-300 hover:-translate-y-[3px] hover:shadow-md cursor-pointer group"
                   >
-                    {/* Thumbnail */}
-                    <div
-                      className={`aspect-video flex items-center justify-center text-4xl ${item.thumbColor}`}
-                    >
-                      {item.icon}
-                    </div>
+                    <div className="bg-white border border-strong rounded-[1.25rem] overflow-hidden transition-all duration-300 hover:-translate-y-[3px] hover:shadow-md cursor-pointer group">
+                      {/* Thumbnail */}
+                      <div
+                        className={`aspect-video flex items-center justify-center text-4xl ${item.thumbColor}`}
+                      >
+                        {item.icon}
+                      </div>
 
-                    {/* Card Body */}
-                    <div className="p-4">
-                      <span className="text-[0.65rem] font-medium tracking-[0.07em] uppercase px-2.5 py-[3px] rounded-full mb-2 inline-block bg-slate-100 text-slate-600">
-                        {item.badge}
-                      </span>
-                      <h4 className="font-serif text-[1rem] font-normal text-navy leading-snug mb-1.5">
-                        {item.title}
-                      </h4>
-                      <p className="text-[0.82rem] text-slate-500 font-light leading-relaxed line-clamp-2">
-                        {item.desc}
-                      </p>
-
-                      {/* Card Meta */}
-                      <div className="flex items-center justify-between pt-2.5 border-t border-slate-100 mt-2.5">
-                        <span className="text-[0.75rem] text-slate-400 font-light">
-                          {item.author}
+                      {/* Card Body */}
+                      <div className="p-4">
+                        <span className="text-[0.65rem] font-medium tracking-[0.07em] uppercase px-2.5 py-[3px] rounded-full mb-2 inline-block bg-slate-100 text-slate-600">
+                          {item.badge}
                         </span>
-                        <button className="text-[0.75rem] text-rose-500 hover:opacity-70 transition-opacity p-[2px]">
-                          Remove
-                        </button>
+                        <h4 className="font-serif text-[1rem] font-normal text-navy leading-snug mb-1.5">
+                          {item.title}
+                        </h4>
+                        <p className="text-[0.82rem] text-slate-500 font-light leading-relaxed line-clamp-2">
+                          {item.desc}
+                        </p>
+
+                        {/* Card Meta */}
+                        <div className="flex items-center justify-between pt-2.5 border-t border-slate-100 mt-2.5">
+                          <span className="text-[0.75rem] text-slate-400 font-light">
+                            {item.author}
+                          </span>
+                          <button className="text-[0.75rem] text-rose-500 hover:opacity-70 transition-opacity p-[2px]">
+                            Remove
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1263,37 +1619,40 @@ const SavedAndActivityPanel: React.FC = () => {
         {activeTab === "activity" && (
           <div className="animate-in fade-in duration-300">
             <div className="flex flex-col gap-3">
-              {BLOG_ACTIVITY.map((activity) => (
+              {BLOG_ACTIVITY.map((activity, i) => (
                 <div
+                  data-aos="fade-up"
+                  data-aos-duration={400 + i * 100}
                   key={activity.id}
-                  className="bg-white border border-slate-200 rounded-[1.25rem] px-5 py-[18px] transition-all duration-200 hover:border-slate-300 hover:shadow-sm cursor-pointer"
                 >
-                  <div className="text-[0.72rem] font-medium tracking-[0.07em] uppercase text-accent mb-1.5 flex items-center gap-1.5">
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="w-[11px] h-[11px] stroke-accent fill-none stroke-2 stroke-linecap-round stroke-linejoin-round"
-                    >
-                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                    </svg>
-                    {activity.blogTitle}
-                  </div>
-
-                  <p className="text-[0.94rem] text-navy font-light leading-relaxed mb-2 line-clamp-2">
-                    "{activity.comment}"
-                  </p>
-
-                  <div className="flex items-center gap-3">
-                    <span className="text-[0.78rem] text-slate-400 font-light">
-                      {activity.time}
-                    </span>
-                    <div className="flex items-center gap-1 text-[0.78rem] text-slate-400 font-light">
+                  <div className="bg-white border border-slate-200 rounded-[1.25rem] px-5 py-[18px] transition-all duration-200 hover:border-slate-300 hover:shadow-sm cursor-pointer">
+                    <div className="text-[0.72rem] font-medium tracking-[0.07em] uppercase text-accent mb-1.5 flex items-center gap-1.5">
                       <svg
                         viewBox="0 0 24 24"
-                        className="w-[11px] h-[11px] stroke-current fill-none stroke-2 stroke-linecap-round"
+                        className="w-[11px] h-[11px] stroke-accent fill-none stroke-2 stroke-linecap-round stroke-linejoin-round"
                       >
-                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                       </svg>
-                      {activity.likes}
+                      {activity.blogTitle}
+                    </div>
+
+                    <p className="text-[0.94rem] text-navy font-light leading-relaxed mb-2 line-clamp-2">
+                      "{activity.comment}"
+                    </p>
+
+                    <div className="flex items-center gap-3">
+                      <span className="text-[0.78rem] text-slate-400 font-light">
+                        {activity.time}
+                      </span>
+                      <div className="flex items-center gap-1 text-[0.78rem] text-slate-400 font-light">
+                        <svg
+                          viewBox="0 0 24 24"
+                          className="w-[11px] h-[11px] stroke-current fill-none stroke-2 stroke-linecap-round"
+                        >
+                          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                        {activity.likes}
+                      </div>
                     </div>
                   </div>
                 </div>
